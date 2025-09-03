@@ -1,0 +1,1045 @@
+code,diag
+001,Tuberculosis
+010,Intest infct
+011,Intest infct
+012,Tuberculosis
+013,Tuberculosis
+014,Tuberculosis
+015,Tuberculosis
+016,Tuberculosis
+017,Tuberculosis
+018,Tuberculosis
+019,Intest infct
+020,Intest infct
+021,Intest infct
+022,Intest infct
+023,Intest infct
+024,Oth bact inf
+025,Oth bact inf
+029,Intest infct
+030,Intest infct
+031,Septicemia
+035,Skin infectn
+037,Oth bact inf
+038,Intest infct
+039,Intest infct
+040,Intest infct
+041,Intest infct
+042,HIV infectn
+043,Intest infct
+048,Intest infct
+049,Intest infct
+050,Intest infct
+051,Intest infct
+052,Intest infct
+053,Intest infct
+054,Intest infct
+059,Intest infct
+060,Intest infct
+061,Intest infct
+062,Intest infct
+063,Intest infct
+064,Encephalitis
+065,Intest infct
+066,Intest infct
+068,Intest infct
+069,Intest infct
+070,Intest infct
+071,Intest infct
+072,Intest infct
+073,Intest infct
+074,Intest infct
+075,Intest infct
+078,Intest infct
+079,Intest infct
+080,Oth infectns
+081,Intest infct
+082,Intest infct
+083,Intest infct
+085,Intest infct
+088,Intest infct
+090,Intest infct
+091,Intest infct
+092,Intest infct
+093,Intest infct
+096,Sexual Infxs
+100,Meningitis
+101,Oth infectns
+102,Oth infectns
+103,Oth infectns
+104,Oth infectns
+110,Mycoses
+111,Mycoses
+112,Carditis
+114,Meningitis
+115,Carditis
+116,Mycoses
+117,Mycoses
+118,Mycoses
+120,Oth infectns
+121,Oth infectns
+122,Oth infectns
+123,Oth infectns
+124,Oth infectns
+125,Oth infectns
+126,Oth infectns
+127,Oth infectns
+128,Oth infectns
+129,Oth infectns
+130,Carditis
+131,Oth infectns
+132,Oth infectns
+133,Oth infectns
+134,Oth infectns
+135,Oth infectns
+136,Oth infectns
+137,Tuberculosis
+138,Oth CNS infx
+139,Encephalitis
+140,Hd/nck cancr
+141,Hd/nck cancr
+142,Hd/nck cancr
+143,Hd/nck cancr
+144,Hd/nck cancr
+145,Hd/nck cancr
+146,Hd/nck cancr
+147,Hd/nck cancr
+148,Hd/nck cancr
+149,Hd/nck cancr
+150,Esoph cancer
+151,Stomch cancr
+152,GI/perit can
+153,Colon cancer
+154,Rctm/anus ca
+155,Liver/ibd ca
+156,GI/perit can
+157,Pancreas can
+158,GI/perit can
+159,Colon cancer
+160,Hd/nck cancr
+161,Hd/nck cancr
+162,Brnch/lng ca
+163,Ot respir ca
+164,Ot primry ca
+165,Ot respir ca
+170,Bone/ct cncr
+171,Bone/ct cncr
+172,Skin melanom
+173,Non-epith ca
+174,Breast cancr
+175,Breast cancr
+176,Ot primry ca
+179,Uterus cancr
+180,Cervix cancr
+181,Fem genit ca
+182,Uterus cancr
+183,Fem genit ca
+184,Fem genit ca
+185,Prostate can
+186,Testis cancr
+187,Mal genit ca
+188,Bladder cncr
+189,Kidny/rnl ca
+190,Ot primry ca
+191,Brain/ns can
+192,Brain/ns can
+193,Thyroid cncr
+194,Ot primry ca
+195,Hd/nck cancr
+196,2ndary malig
+197,2ndary malig
+198,2ndary malig
+199,Malig neopls
+200,Non-Hodg lym
+201,Hodgkin-s ds
+202,Leukemias
+203,Leukemias
+204,Leukemias
+205,Leukemias
+206,Leukemias
+207,Leukemias
+208,Leukemias
+209,2ndary malig
+210,Ot bnign neo
+211,Intest infct
+212,Ot bnign neo
+213,Eye infectn
+214,Ot bnign neo
+215,Ot bnign neo
+216,Ot bnign neo
+217,Ot bnign neo
+218,Bnign ut neo
+219,Bnign ut neo
+220,Ot bnign neo
+221,Ot bnign neo
+222,Intest infct
+223,Ot bnign neo
+224,Ot bnign neo
+225,Ot bnign neo
+226,Ot bnign neo
+227,Ot bnign neo
+228,Ot bnign neo
+229,Ot bnign neo
+230,Colon cancer
+231,Brnch/lng ca
+232,Non-epith ca
+233,Bladder cncr
+234,Ot primry ca
+235,Neoplsm unsp
+236,Neoplsm unsp
+237,Neoplsm unsp
+238,Neoplsm unsp
+239,Neoplsm unsp
+240,Thyroid dsor
+241,Thyroid dsor
+242,Thyroid dsor
+243,Thyroid dsor
+244,Thyroid dsor
+245,Thyroid dsor
+246,Thyroid dsor
+249,DiabMel no c
+250,DiabMel no c
+251,Ot endo dsor
+252,Ot endo dsor
+253,Ot endo dsor
+254,Ot endo dsor
+255,Ot endo dsor
+256,Menopausl dx
+257,Ot endo dsor
+258,Ot endo dsor
+259,Ot endo dsor
+260,Nutrit defic
+261,Infect arth
+262,Nutrit defic
+263,Nutrit defic
+264,Nutrit defic
+265,Nutrit defic
+266,Nutrit defic
+267,Nutrit defic
+268,Nutrit defic
+269,Nutrit defic
+270,Ot nutrit dx
+271,Ot nutrit dx
+272,Hyperlipidem
+273,Ot nutrit dx
+274,Gout/ot crys
+275,Ot nutrit dx
+276,Complic proc
+277,Complic proc
+278,Ot nutrit dx
+279,Complic devi
+280,Anemia
+281,Anemia
+282,Anemia
+283,Anemia
+284,Anemia
+285,Acut p-h anm
+286,Coag/hemr dx
+287,Coag/hemr dx
+288,Wht blood dx
+289,Coag/hemr dx
+290,Delirium/demen
+291,Alcohol-relate
+292,Substance-rela
+293,Anxiety disord
+294,Delirium/demen
+295,Schizophrenia
+296,Mood disorders
+297,Schizophrenia
+298,Schizophrenia
+299,Disorders usua
+300,Anxiety disord
+301,Oth bact inf
+302,Miscellaneous
+303,Alcohol-relate
+304,Substance-rela
+305,Alcohol-relate
+306,Miscellaneous
+307,Developmental
+308,Anxiety disord
+309,Adjustment dis
+310,Delirium/demen
+311,Mood disorders
+312,Attention-defi
+313,Anxiety disord
+314,Attention-defi
+315,Developmental
+316,Miscellaneous
+317,Developmental
+318,Developmental
+319,Developmental
+320,Intest infct
+321,Meningitis
+322,Meningitis
+323,Encephalitis
+324,Infect arth
+325,Oth nerv dx
+326,Oth CNS infx
+327,Ot conn tiss
+328,Carditis
+329,Intest infct
+330,Ot hered CNS
+331,Delirium/demen
+332,Oth nerv dx
+333,Ot hered CNS
+334,Ot hered CNS
+335,Ot hered CNS
+336,Ot hered CNS
+337,Ot hered CNS
+338,Oth bact inf
+339,Headache/mig
+340,MS
+341,Encephalitis
+342,Paralysis
+343,Paralysis
+344,Oth nerv dx
+345,Epilepsy/cnv
+346,Acute CVD
+347,Oth nerv dx
+348,Coma/brn dmg
+349,Complic proc
+350,Oth nerv dx
+351,Oth nerv dx
+352,Oth nerv dx
+353,Oth nerv dx
+354,Oth nerv dx
+355,Oth nerv dx
+356,Oth nerv dx
+357,Oth nerv dx
+358,Oth nerv dx
+359,Oth nerv dx
+360,Eye infectn
+361,Encephalitis
+362,Retinal dx
+363,Eye infectn
+364,Carditis
+365,Glaucoma
+366,Cataract
+367,Blindness
+368,Blindness
+369,Blindness
+370,Eye infectn
+371,Other eye dx
+372,Eye infectn
+373,Eye infectn
+374,Other eye dx
+375,Eye infectn
+376,Eye infectn
+377,Eye infectn
+378,Other eye dx
+379,Eye infectn
+380,Other ear dx
+381,Otitis media
+382,Otitis media
+383,Otitis media
+384,Other ear dx
+385,Other ear dx
+386,Dizziness
+387,Otitis media
+388,Other ear dx
+389,Other ear dx
+390,Oth bact inf
+391,Carditis
+392,Carditis
+393,Carditis
+394,Hrt valve dx
+395,Hrt valve dx
+396,Hrt valve dx
+397,Hrt valve dx
+398,Carditis
+399,Oth bact inf
+400,Oth bact inf
+401,HTN
+402,Htn complicn
+403,Htn complicn
+404,Htn complicn
+405,Htn complicn
+408,Oth bact inf
+410,Acute MI
+411,Coron athero
+412,Coron athero
+413,Coron athero
+414,Complic devi
+415,Complic proc
+416,Oth bact inf
+417,Oth bact inf
+418,Oth bact inf
+419,Oth bact inf
+420,Carditis
+421,Carditis
+422,Carditis
+423,Carditis
+424,Hrt valve dx
+425,Carditis
+426,Conduction
+427,Cardia arrst
+428,chf;nonhp
+429,Carditis
+430,Acute CVD
+431,Acute CVD
+432,Acute CVD
+433,Acute CVD
+434,Acute CVD
+435,TIA
+436,Acute CVD
+437,Htn complicn
+438,Late eff CVD
+440,Complic devi
+441,Aneurysm
+442,Aneurysm
+443,Aneurysm
+444,Art embolism
+445,Art embolism
+446,Ot circul dx
+447,Aneurysm
+448,Ot circul dx
+449,Septicemia
+450,Oth CNS infx
+451,Oth CNS infx
+452,Oth CNS infx
+453,Phlebitis
+454,Varicose vn
+455,Hemmorhoids
+456,Esophgeal dx
+457,Oth vein dx
+458,Complic proc
+459,Ot circul dx
+460,Ot up rsp in
+461,Ot up rsp in
+462,Encephalitis
+463,Oth CNS infx
+464,Ot up rsp in
+465,Ot up rsp in
+466,Bronchitis
+467,Oth CNS infx
+468,Oth CNS infx
+469,Oth CNS infx
+470,Meningitis
+471,Meningitis
+472,Ot uppr resp
+473,Ot up rsp in
+474,Tonsillitis
+475,Tonsillitis
+476,Ot uppr resp
+477,Allergy
+478,Meningitis
+479,Meningitis
+480,Pneumonia
+481,Pneumonia
+482,Pneumonia
+483,Pneumonia
+484,Pneumonia
+485,Pneumonia
+486,Pneumonia
+487,Influenza
+488,Influenza
+490,COPD
+491,COPD
+492,COPD
+493,Asthma
+494,COPD
+495,Lung externl
+496,COPD
+498,Encephalitis
+499,Encephalitis
+500,Lung externl
+501,Lung externl
+502,Lung externl
+503,Lung externl
+504,Lung externl
+505,Lung externl
+506,Lung externl
+507,Asp pneumon
+508,Lung externl
+509,Viral infect
+510,Pleurisy
+511,2ndary malig
+512,Complic proc
+513,Oth low resp
+514,Oth low resp
+515,Oth low resp
+516,Oth low resp
+517,Adlt resp fl
+518,Adlt resp fl
+519,Complic proc
+520,Encephalitis
+521,Pneumonia
+522,Teeth dx
+523,Teeth dx
+524,Teeth dx
+525,Teeth dx
+526,Teeth dx
+527,Mouth dx
+528,Mouth dx
+529,Mouth dx
+530,Complic proc
+531,Gasduo ulcer
+532,Eye infectn
+533,Gasduo ulcer
+534,Gasduo ulcer
+535,Gastritis
+536,Complic proc
+537,Ot dx stomch
+538,Other GI dx
+539,Complic proc
+540,Appendicitis
+541,Appendicitis
+542,Appendicitis
+543,Appendicitis
+544,Eye infectn
+545,Septicemia
+546,Viral infect
+547,Meningitis
+548,Viral infect
+549,Viral infect
+550,Abdom hernia
+551,Abdom hernia
+552,Abdom hernia
+553,Abdom hernia
+555,Ulcerat col
+556,Ulcerat col
+557,Eye infectn
+558,Allergy
+559,Viral infect
+560,Encephalitis
+562,Diverticulos
+564,Anal/rectal
+565,Anal/rectal
+566,Anal/rectal
+567,Infect arth
+568,Other GI dx
+569,Anal/rectal
+570,Oth liver dx
+571,Hepatitis
+572,Oth liver dx
+573,Hepatitis
+574,Biliary dx
+575,Biliary dx
+576,Biliary dx
+577,Pancreas dx
+578,GI hemorrhag
+579,Complic proc
+580,Nephritis
+581,Intest infct
+582,Encephalitis
+583,Nephritis
+584,Ac renl fail
+585,Chr kidney dis
+586,Ac renl fail
+587,Nephritis
+588,Ot dx kidney
+589,Intest infct
+590,UTI
+591,Ot dx kidney
+592,Urin stone
+593,Ot dx kidney
+594,Urin stone
+595,UTI
+596,Complic devi
+597,UTI
+598,Ot dx bladdr
+599,Ot dx bladdr
+600,BPH
+601,Inf male gen
+602,Oth male gen
+603,Inf male gen
+604,Inf male gen
+605,Oth male gen
+606,Oth male gen
+607,Inf male gen
+608,Inf male gen
+609,Viral infect
+610,Breast dx
+611,Breast dx
+612,Breast dx
+614,PID
+615,PID
+616,PID
+617,Endometrios
+618,Prolapse
+619,Ot femal gen
+620,Encephalitis
+621,Encephalitis
+622,Encephalitis
+623,Encephalitis
+624,Encephalitis
+625,Encephalitis
+626,Menstrual dx
+627,Menopausl dx
+628,Encephalitis
+629,Complic devi
+630,Encephalitis
+631,Encephalitis
+632,Encephalitis
+633,Ectopic preg
+634,Spont abortn
+635,Induc abortn
+636,Induc abortn
+637,Induc abortn
+638,Encephalitis
+639,Abort compl
+640,Hemorr preg
+641,Hemorr preg
+642,HTN in preg
+643,Ot preg comp
+644,Early labor
+645,Long pregncy
+646,Ot preg comp
+647,Ot preg comp
+648,DM in preg
+649,Ot compl bir
+650,Nml preg/del
+651,Nml preg/del
+652,Malposition
+653,Pelvic obstr
+654,Ot compl bir
+655,Ot compl bir
+656,Fetal distrs
+657,Amnios dx
+658,Amnios dx
+659,Ot compl bir
+660,Malposition
+661,Fetal distrs
+662,Encephalitis
+663,Umbil cord
+664,OB-related per
+665,Ot compl bir
+666,Ot compl bir
+667,Ot compl bir
+668,Ot compl bir
+669,Forceps del
+670,Ot compl bir
+671,Ot compl bir
+672,Ot compl bir
+673,Ot compl bir
+674,Ot compl bir
+675,Ot compl bir
+676,Ot compl bir
+677,Ot compl bir
+678,Ot compl bir
+679,Ot compl bir
+680,Skin infectn
+681,Skin infectn
+682,Skin infectn
+683,Lymph enlarg
+684,Skin infectn
+685,Skin infectn
+686,Skin infectn
+690,Ot infl skin
+691,Allergy
+692,Allergy
+693,Allergy
+694,Ot infl skin
+695,Ot infl skin
+696,Ot infl skin
+697,Ot infl skin
+698,Ot infl skin
+700,Hepatitis
+701,Hepatitis
+702,Hepatitis
+703,Hepatitis
+704,Hepatitis
+705,Hepatitis
+706,Hepatitis
+707,Hepatitis
+708,Allergy
+709,Hepatitis
+710,Ot conn tiss
+711,Infect arth
+712,Gout/ot crys
+713,Ot joint dx
+714,Rheum arth
+715,Osteoarthros
+716,Joint injury
+717,Joint injury
+718,Joint injury
+719,Ot joint dx
+720,Back problem
+721,Back problem
+722,Back problem
+723,Back problem
+724,Back problem
+725,Ot conn tiss
+726,Ot conn tiss
+727,Acq foot def
+728,Ot conn tiss
+729,Ot conn tiss
+730,Infect arth
+731,Ot bone dx
+732,Ot bone dx
+733,Osteoporosis
+734,Acq foot def
+735,Acq foot def
+736,Acq foot def
+737,Ot acq defor
+738,Ot acq defor
+739,Ot bone dx
+740,Nerv cong an
+741,Nerv cong an
+742,Carditis
+743,Ot cong anom
+744,Ot cong anom
+745,Cardiac anom
+746,Cardiac anom
+747,Cardiac anom
+748,Ot cong anom
+749,Ot cong anom
+750,GI cong anom
+751,GI cong anom
+752,gu cong anom
+753,gu cong anom
+754,Ot cong anom
+755,Ot cong anom
+756,Ot cong anom
+757,Ot cong anom
+758,Ot cong anom
+759,Ot cong anom
+760,Alcohol-relate
+761,Eye infectn
+762,Ot perint dx
+763,Ot perint dx
+764,Low birth wt
+765,Liveborn
+766,Ot perint dx
+767,Birth trauma
+768,Birth asphyx
+769,Eye infectn
+770,Birth asphyx
+771,Eye infectn
+772,Eye infectn
+773,Eye infectn
+774,Eye infectn
+775,Ot perint dx
+776,Ot perint dx
+777,Ot perint dx
+778,Eye infectn
+779,Amnios dx
+780,Coma/brn dmg
+781,Ot conn tiss
+782,Coag/hemr dx
+783,Ot nutrit dx
+784,Headache/mig
+785,Dysrhythmia
+786,Chest pain
+787,Nausea/vomit
+788,Other GU dx
+789,2ndary malig
+790,DiabMel no c
+791,DiabMel no c
+792,Amnios dx
+793,Biliary dx
+794,Ot circul dx
+795,Cervix cancr
+796,Ot circul dx
+797,Delirium/demen
+798,Unclassified
+799,Adlt resp fl
+800,Fx skull fac
+801,Fx skull fac
+802,Fx skull fac
+803,Fx skull fac
+804,Fx skull fac
+805,Oth fracture
+806,Spin cor inj
+807,Oth fracture
+808,Oth fracture
+809,Intest infct
+810,Fx arm
+811,Fx arm
+812,Fx arm
+813,Fx arm
+814,Fx arm
+815,Fx arm
+816,Fx arm
+817,Fx arm
+818,Fx arm
+819,Fx arm
+820,Fx hip
+821,Fx leg
+822,Fx leg
+823,Fx leg
+824,Fx leg
+825,Fx leg
+826,Fx leg
+827,Fx leg
+828,Oth fracture
+829,Oth fracture
+830,Joint injury
+831,Joint injury
+832,Joint injury
+833,Joint injury
+834,Joint injury
+835,Joint injury
+836,Joint injury
+837,Joint injury
+838,Joint injury
+839,Joint injury
+840,Oth infectns
+841,Intest infct
+842,Intest infct
+843,Intest infct
+844,Intest infct
+845,Intest infct
+846,Intest infct
+847,Intest infct
+848,Oth infectns
+849,Intest infct
+850,Intracrn inj
+851,Intracrn inj
+852,Intracrn inj
+853,Intracrn inj
+854,Intracrn inj
+855,Oth infectns
+859,Oth infectns
+860,Crush injury
+861,Crush injury
+862,Crush injury
+863,Crush injury
+864,Crush injury
+865,Crush injury
+866,Crush injury
+867,Crush injury
+868,Crush injury
+869,Crush injury
+870,Opn wnd head
+871,Opn wnd head
+872,Opn wnd head
+873,Opn wnd head
+874,Opn wnd head
+875,Opn wnd head
+876,Opn wnd head
+877,Opn wnd head
+878,Opn wnd head
+879,Opn wnd head
+880,Opn wnd extr
+881,Opn wnd extr
+882,Opn wnd extr
+883,Opn wnd extr
+884,Opn wnd extr
+885,Opn wnd extr
+886,Opn wnd extr
+887,Opn wnd extr
+888,Oth infectns
+889,Oth infectns
+890,Opn wnd extr
+891,Opn wnd extr
+892,Opn wnd extr
+893,Opn wnd extr
+894,Opn wnd extr
+895,Opn wnd extr
+896,Opn wnd extr
+897,Opn wnd extr
+900,Crush injury
+901,Crush injury
+902,Crush injury
+903,Crush injury
+904,Crush injury
+905,Fx arm
+906,Burns
+907,Intracrn inj
+908,Crush injury
+909,Complic proc
+910,Sexual Infxs
+911,Sexual Infxs
+912,Sexual Infxs
+913,Sexual Infxs
+914,Sexual Infxs
+915,Sexual Infxs
+916,Sexual Infxs
+917,Sexual Infxs
+918,Sexual Infxs
+919,Sexual Infxs
+920,Sexual Infxs
+921,Superfic inj
+922,Superfic inj
+923,Superfic inj
+924,Superfic inj
+925,Crush injury
+926,Crush injury
+927,Crush injury
+928,Crush injury
+929,Crush injury
+930,Other injury
+931,Other injury
+932,Other injury
+933,Other injury
+934,Other injury
+935,Other injury
+936,Other injury
+937,Other injury
+938,Other injury
+939,Other injury
+940,Burns
+941,Burns
+942,Burns
+943,Burns
+944,Burns
+945,Burns
+946,Burns
+947,Burns
+948,Burns
+949,Burns
+950,Other injury
+951,Other injury
+952,Sexual Infxs
+953,Other injury
+954,Other injury
+955,Other injury
+956,Other injury
+957,Other injury
+958,Other injury
+959,Other injury
+960,Poisn ot med
+961,Poisn ot med
+962,Poisn ot med
+963,Poisn ot med
+964,Poisn ot med
+965,Poisn ot med
+966,Poisn ot med
+967,Poisn ot med
+968,Poisn ot med
+969,Poison psych
+970,Poisn ot med
+971,Poisn ot med
+972,Poisn ot med
+973,Poisn ot med
+974,Poisn ot med
+975,Poisn ot med
+976,Poisn ot med
+977,Poisn ot med
+978,Poisn ot med
+979,Poisn ot med
+980,Alcohol-relate
+981,Poisn nonmed
+982,Poisn nonmed
+983,Poisn nonmed
+984,Poisn nonmed
+985,Poisn nonmed
+986,Poisn nonmed
+987,Poisn nonmed
+988,Poisn nonmed
+989,Poisn nonmed
+990,Other injury
+991,Other injury
+992,Other injury
+993,Other injury
+994,Other injury
+995,Allergy
+996,Complic devi
+997,Complic proc
+998,Complic proc
+999,Complic devi
+E00,E Codes: Unspe
+E01,E Codes: Unspe
+E02,E Codes: Unspe
+E03,E Codes: Unspe
+E80,E Codes: Pedal
+E81,e codes: motor
+E82,E Codes: Pedal
+E83,E Codes: Drown
+E84,E Codes: Other
+E85,E Codes: Poiso
+E86,E Codes: Poiso
+E87,E Codes: Adver
+E88,E Codes: Fall
+E89,E Codes: Fire/
+E90,E Codes: Natur
+E91,E Codes: Drown
+E92,E Codes: Cut/p
+E93,E Codes: Adver
+E94,E Codes: Adver
+E95,Suicide and in
+E96,E Codes: Cut/p
+E97,E Codes: Cut/p
+E98,E Codes: Cut/p
+E99,E Codes: Other
+V01,Immuniz/scrn
+V02,Immuniz/scrn
+V03,Immuniz/scrn
+V04,Immuniz/scrn
+V05,Immuniz/scrn
+V06,Immuniz/scrn
+V07,Allergy
+V08,HIV infectn
+V09,Oth bact inf
+V10,Bladder cncr
+V11,Screening and
+V12,Gasduo ulcer
+V13,Allergy
+V14,Allergy
+V15,Allergy
+V16,Unclassified
+V17,Unclassified
+V18,Unclassified
+V19,Unclassified
+V20,Social admin
+V21,Low birth wt
+V22,Nml preg/del
+V23,Ot compl bir
+V24,Nml preg/del
+V25,Contraceptiv
+V26,Contraceptiv
+V27,Nml preg/del
+V28,Immuniz/scrn
+V29,Exam/eval
+V30,Liveborn
+V31,Liveborn
+V32,Liveborn
+V33,Liveborn
+V34,Liveborn
+V35,Liveborn
+V36,Liveborn
+V37,Liveborn
+V39,Liveborn
+V40,Developmental
+V41,Blindness
+V42,Chr kidney dis
+V43,Cataract
+V44,Ot uppr resp
+V45,Chr kidney dis
+V46,Adlt resp fl
+V47,Other GI dx
+V48,Ot bone dx
+V49,Ot bone dx
+V50,Ot perint dx
+V51,Ot aftercare
+V52,Other eye dx
+V53,Conduction
+V54,Fx arm
+V55,Ot aftercare
+V56,Chr kidney dis
+V57,Rehab
+V58,Maint chem/r
+V59,Unclassified
+V60,Social admin
+V61,Social admin
+V62,Screening and
+V63,Social admin
+V64,Unclassified
+V65,DiabMel no c
+V66,Maint chem/r
+V67,Maint chem/r
+V68,Exam/eval
+V69,Unclassified
+V70,Exam/eval
+V71,Exam/eval
+V72,Allergy
+V73,Immuniz/scrn
+V74,Immuniz/scrn
+V75,Immuniz/scrn
+V76,Other screen
+V77,Other screen
+V78,Other screen
+V79,Screening and
+V80,Other screen
+V81,Other screen
+V82,Other screen
+V83,Unclassified
+V84,Unclassified
+V85,Ot nutrit dx
+V86,Unclassified
+V87,Unclassified
+V88,Ot bone dx
+V89,Unclassified
+V90,Complic proc
+V91,Nml preg/del

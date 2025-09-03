@@ -1,0 +1,126 @@
+{
+  "admission_type_labels": [
+    { "cat": 1, "label": "Emergency" },
+    { "cat": 2, "label": "Urgent" },
+    { "cat": 3, "label": "Elective" },
+    { "cat": 4, "label": "Newborn" },
+    { "cat": 5, "label": "Not Available" },
+    { "cat": 6, "label": "NULL" },
+    { "cat": 7, "label": "Trauma Center" },
+    { "cat": 8, "label": "Not Mapped" }
+  ],
+
+  "admission_source_labels": [
+    { "cat": 1, "label": "Physician Referral" },
+    { "cat": 2, "label": "Clinic Referral" },
+    { "cat": 3, "label": "HMO Referral" },
+    { "cat": 4, "label": "Transfer from a hospital" },
+    { "cat": 5, "label": "Transfer from a Skilled Nursing Facility (SNF)" },
+    { "cat": 6, "label": "Transfer from another health care facility" },
+    { "cat": 7, "label": "Emergency Room" },
+    { "cat": 8, "label": "Court/Law Enforcement" },
+    { "cat": 9, "label": "Not Available" },
+    { "cat": 10, "label": "Transfer from critial access hospital" },
+    { "cat": 11, "label": "Normal Delivery" },
+    { "cat": 12, "label": "Premature Delivery" },
+    { "cat": 13, "label": "Sick Baby" },
+    { "cat": 14, "label": "Extramural Birth" },
+    { "cat": 15, "label": "Not Available" },
+    { "cat": 17, "label": "NULL" },
+    { "cat": 18, "label": "Transfer From Another Home Health Agency" },
+    { "cat": 19, "label": "Readmission to Same Home Health Agency" },
+    { "cat": 20, "label": "Not Mapped" },
+    { "cat": 21, "label": "Unknown/Invalid" },
+    {
+      "cat": 22,
+      "label": "Transfer from hospital inpt/same fac reslt in a sep claim"
+    },
+    { "cat": 23, "label": "Born inside this hospital" },
+    { "cat": 24, "label": "Born outside this hospital" },
+    { "cat": 25, "label": "Transfer from Ambulatory Surgery Center" },
+    { "cat": 26, "label": "Transfer from Hospice" }
+  ],
+  "discharge_disposition_labels": [
+    { "cat": 1, "label": "Discharged to home" },
+    {
+      "cat": 2,
+      "label": "Discharged/transferred to another short term hospital"
+    },
+    { "cat": 3, "label": "Discharged/transferred to SNF" },
+    { "cat": 4, "label": "Discharged/transferred to ICF" },
+    {
+      "cat": 5,
+      "label": "Discharged/transferred to another type of inpatient care institution"
+    },
+    {
+      "cat": 6,
+      "label": "Discharged/transferred to home with home health service"
+    },
+    { "cat": 7, "label": "Left AMA" },
+    {
+      "cat": 8,
+      "label": "Discharged/transferred to home under care of Home IV provider"
+    },
+    { "cat": 9, "label": "Admitted as an inpatient to this hospital" },
+    {
+      "cat": 10,
+      "label": "Neonate discharged to another hospital for neonatal aftercare"
+    },
+    { "cat": 11, "label": "Expired" },
+    {
+      "cat": 12,
+      "label": "Still patient or expected to return for outpatient services"
+    },
+    { "cat": 13, "label": "Hospice / home" },
+    { "cat": 14, "label": "Hospice / medical facility" },
+    {
+      "cat": 15,
+      "label": "Discharged/transferred within this institution to Medicare approved swing bed"
+    },
+    {
+      "cat": 16,
+      "label": "Discharged/transferred/referred another institution for outpatient services"
+    },
+    {
+      "cat": 17,
+      "label": "Discharged/transferred/referred to this institution for outpatient services"
+    },
+    { "cat": 18, "label": "NULL" },
+    { "cat": 19, "label": "Expired at home. Medicaid only, hospice." },
+    {
+      "cat": 20,
+      "label": "Expired in a medical facility. Medicaid only, hospice."
+    },
+    { "cat": 21, "label": "Expired, place unknown. Medicaid only, hospice." },
+    {
+      "cat": 22,
+      "label": "Discharged/transferred to another rehab fac including rehab units of a hospital"
+    },
+    {
+      "cat": 23,
+      "label": "Discharged/transferred to a long term care hospital"
+    },
+    {
+      "cat": 24,
+      "label": "Discharged/transferred to a nursing facility certified under Medicaid but not certified under Medicare"
+    },
+    { "cat": 25, "label": "Not Mapped" },
+    { "cat": 26, "label": "Unknown/Invalid" },
+    {
+      "cat": 30,
+      "label": "Discharged/transferred to another Type of Health Care Institution not Defined Elsewhere"
+    },
+    {
+      "cat": 27,
+      "label": "Discharged/transferred to a federal health care facility"
+    },
+    {
+      "cat": 28,
+      "label": "Discharged/transferred/referred to a psychiatric hospital of psychiatric distinct part unit of a hospital"
+    },
+    {
+      "cat": 29,
+      "label": "Discharged/transferred to a Critical Access Hospital (CAH)"
+    }
+  ]
+}
