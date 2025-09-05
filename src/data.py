@@ -1,6 +1,7 @@
 import streamlit as st
 import altair as alt
 import pandas as pd
+from helper import render_navigation
 
 st.title("Data Characteristics")
 
@@ -63,3 +64,5 @@ text = base.mark_text(
 )
 
 st.altair_chart(bars + text)
+
+render_navigation("metadata.py", "patient.py")

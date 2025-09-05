@@ -1,6 +1,7 @@
 import streamlit as st
 import altair as alt
 import pandas as pd
+from helper import render_navigation
 
 st.title("By Patient")
 
@@ -46,3 +47,5 @@ rep_max_patient = by_patient[by_patient["encounters"] == max_patient_encounters]
 rep_max_patient_data = data[data["patient_nbr"] == rep_max_patient]
 
 st.dataframe(rep_max_patient_data)
+
+render_navigation("data.py", None)

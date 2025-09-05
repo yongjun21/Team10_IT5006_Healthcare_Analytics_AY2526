@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+from helper import render_navigation
 
 st.title("Context")
 
@@ -29,3 +30,5 @@ st.dataframe(
 
 st.subheader("Variables")
 st.dataframe(dataset.variables)
+
+render_navigation("landing.py", "data.py")
