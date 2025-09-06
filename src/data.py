@@ -3,17 +3,14 @@ import altair as alt
 import pandas as pd
 from helper import render_navigation
 
-st.title("Data Characteristics")
+data = st.session_state.data
 
-# drop the last 3 columns which are the outcome one-hot encoded
-data = st.session_state.data.iloc[:,:-3]
+st.title("Data Characteristics")
 
 st.subheader("Sample")
 st.dataframe(data.head(10))
 
 st.subheader("Distribution of Outcome")
-
-data = st.session_state.data
 
 data["readmitted"] = data["readmitted"].astype('category')
 outcome_value_counts = data["readmitted"].value_counts()
@@ -48,15 +45,15 @@ missing_stats = pd.DataFrame({
 })
 
 base = alt.Chart(missing_stats[missing_stats['missing_pct'] > 0].reset_index()).encode(
-    x=alt.X('index', title='Feature', axis=alt.Axis(labelAngle=-60, labelLimit=0), sort='-y'),
-    y=alt.Y('missing_pct', title='Percentage of Missing Values'),
+    x=alt.X('index', title='Feature', axis=alt.Axis(labelAngle=-55, labelLimit=0, orient='top'), sort='-y'),
+    y=alt.Y('missing_pct', title='Percentage of Missing Values', scale=alt.Scale(reverse=True)),
 )
 
 bars = base.mark_bar()
 text = base.mark_text(
     align='center',
-    baseline='bottom',
-    dy=-5
+    baseline='top',
+    dy=5
 ).encode(
     text=alt.Text('missing_pct:Q', format='.1f')
 ).properties(

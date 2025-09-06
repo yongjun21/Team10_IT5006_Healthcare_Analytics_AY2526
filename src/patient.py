@@ -1,20 +1,17 @@
 import streamlit as st
 import altair as alt
 import pandas as pd
-from helper import render_navigation
+
+from helper import render_navigation, get_by_patient
 
 st.title("By Patient")
 
 data = st.session_state.data
+outcome_oh = st.session_state.outcome_oh
 
-grouped_by_patient = data.groupby("patient_nbr")
-by_patient = pd.DataFrame({
-    "encounters": grouped_by_patient["encounter_id"].count(),
-    "readmitted_<30": grouped_by_patient["readmitted_<30"].mean(),
-    "readmitted_>30": grouped_by_patient["readmitted_>30"].mean(),
-    "readmitted_NO": grouped_by_patient["readmitted_NO"].mean(),
-    "time_in_hospital": grouped_by_patient["time_in_hospital"].mean(),
-})
+if "by_patient" not in st.session_state:
+    st.session_state.by_patient = get_by_patient(data, outcome_oh)
+by_patient = st.session_state.by_patient
 
 max_patient_encounters = by_patient["encounters"].max()
 
@@ -48,4 +45,4 @@ rep_max_patient_data = data[data["patient_nbr"] == rep_max_patient]
 
 st.dataframe(rep_max_patient_data)
 
-render_navigation("data.py", None)
+render_navigation("data.py", "features/index.py")

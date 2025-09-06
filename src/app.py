@@ -7,6 +7,8 @@ import seaborn as sns
 
 from ucimlrepo import fetch_ucirepo
 
+from helper import get_outcome_oh
+
 @st.cache_data
 def load_data():
     return fetch_ucirepo(id=296)
@@ -14,16 +16,22 @@ def load_data():
 if "dataset" not in st.session_state:
     dataset = load_data()
     data = dataset.data.original.copy()
-    targets_oh = pd.get_dummies(dataset.data.targets, dtype=int)
-    data = pd.merge(data, targets_oh, left_index=True, right_index=True)
+    outcome_oh = get_outcome_oh(dataset)
     st.session_state.dataset = dataset
     st.session_state.data = data
+    st.session_state.outcome_oh = outcome_oh
 
-
-landing_page = st.Page("landing.py", title="Start", default=True)
-metadata_page = st.Page("metadata.py", title="Context", url_path="/context")
-data_page = st.Page("data.py", title="Data", url_path="/data")
-patient_page = st.Page("patient.py", title="Patient", url_path="/patient")
-
-pg = st.navigation([landing_page, metadata_page, data_page, patient_page])
+pg = st.navigation([
+    st.Page("landing.py", title="Start", default=True),
+    st.Page("metadata.py", title="Context", url_path="/context"),
+    st.Page("data.py", title="Data", url_path="/data"),
+    st.Page("patient.py", title="Patient", url_path="/patient"),
+    st.Page("features/index.py", title="Features", url_path="/features"),
+    st.Page("features/demographics.py", title="Demographics", url_path="/demographics", icon=":material/line_start:"),
+    st.Page("features/admission.py", title="Admission Type / Discharge Disposition", url_path="/admission", icon=":material/line_start:"),
+    st.Page("features/quantitative.py", title="Length of Stay / Number of Past Visits", url_path="/quantitatives", icon=":material/line_start:"),
+    st.Page("features/medications.py", title="Medications", url_path="/medications", icon=":material/line_start:"),
+    st.Page("features/diagnoses.py", title="Diagnoses", url_path="/diagnoses", icon=":material/line_start:"),
+    st.Page("features/lab.py", title="Lab Results", url_path="/lab", icon=":material/line_start:"),
+])
 pg.run()
