@@ -1,9 +1,11 @@
 numpy
 pandas
 scikit-learn
+statsmodels
+streamlit
 matplotlib
 seaborn
-streamlit
 altair
+plotly
 ucimlrepo
 jupyter
