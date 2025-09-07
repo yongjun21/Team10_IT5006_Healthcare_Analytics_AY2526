@@ -24,7 +24,7 @@ paper_info = pd.DataFrame({
     ]
 })
 st.dataframe(
-    paper_info.style,
+    paper_info,
     hide_index=True
 )
 
