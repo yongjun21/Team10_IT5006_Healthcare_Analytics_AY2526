@@ -12,7 +12,6 @@ st.dataframe(data.head(10))
 
 st.subheader("Distribution of Outcome")
 
-data["readmitted"] = data["readmitted"].astype('category')
 outcome_value_counts = data["readmitted"].value_counts()
 
 base = alt.Chart(outcome_value_counts.reset_index()).encode(

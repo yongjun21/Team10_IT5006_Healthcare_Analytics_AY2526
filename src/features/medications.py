@@ -10,8 +10,10 @@ dataset = st.session_state.dataset
 data = st.session_state.data
 outcome_oh = st.session_state.outcome_oh
 
-medication_cols = dataset.variables[dataset.variables["description"].str.startswith("The feature indicates whether the drug was prescribed")]["name"]
-medication_bool = data[medication_cols].apply(lambda x: (x != 'No').astype(int))
+if "medication_bool" not in st.session_state:
+    medication_cols = dataset.variables[dataset.variables["description"].str.startswith("The feature indicates whether the drug was prescribed")]["name"]
+    st.session_state.medication_bool = data[medication_cols].apply(lambda x: (x != 'No').astype(int))
+medication_bool = st.session_state.medication_bool
 
 med_usage = pd.DataFrame({
     "<30": (medication_bool.mul(outcome_oh["readmitted_<30"], axis=0)).sum(axis=0) / len(data) * 100,
@@ -20,6 +22,12 @@ med_usage = pd.DataFrame({
 })
 
 med_usage = med_usage.reindex(med_usage.sum(axis=1).sort_values(ascending=False).index)
+
+@st.cache_data
+def get_pca(medication_bool):
+    pca = PCA()
+    pca.fit_transform(medication_bool)
+    return pca
 
 
 st.title("Feature Analysis - Medications")
@@ -151,8 +159,7 @@ st.altair_chart(correlation_chart, use_container_width=True)
 
 st.subheader("PCA Analysis")
 
-pca = PCA()
-pca_result = pca.fit_transform(medication_bool)
+pca = get_pca(medication_bool)
 
 # Create PCA explained variance data
 pca_data = pd.DataFrame({
@@ -229,4 +236,4 @@ pca_components_chart = (pca_heatmap + pca_text).resolve_scale(color='independent
 
 st.altair_chart(pca_components_chart, use_container_width=True)
 
-render_navigation("features/quantitative.py", "features/diagnoses.py")
+render_navigation("features/mixed.py", "features/diagnoses.py")

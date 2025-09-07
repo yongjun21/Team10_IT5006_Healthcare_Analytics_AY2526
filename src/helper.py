@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
 
 def render_navigation(previous_page, next_page):
     st.markdown("---")
@@ -31,3 +32,9 @@ def get_by_patient(data, outcome_oh):
         "readmitted_>30": outcome_oh_grouped_by_patient["readmitted_>30"].mean(),
         "readmitted_NO": outcome_oh_grouped_by_patient["readmitted_NO"].mean(),
     })
+
+@st.cache_data
+def get_scatter_data(data, x_features, y_features):
+    x_jitter = np.random.uniform(-0.5, 0.5, len(data))
+    y_jitter = np.random.uniform(-0.5, 0.5, len(data))
+    return data[x_features].sum(axis=1) + x_jitter, data[y_features].sum(axis=1) + y_jitter, 
