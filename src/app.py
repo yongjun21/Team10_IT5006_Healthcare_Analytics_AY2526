@@ -32,9 +32,9 @@ pg = st.navigation([
     st.Page("features/demographics.py", title="Demographics", url_path="/demographics", icon=":material/line_start:"),
     st.Page("features/admission.py", title="Admission Type / Discharge Disposition", url_path="/admission", icon=":material/line_start:"),
     st.Page("features/quantitative.py", title="Quantitative Features", url_path="/quantitatives", icon=":material/line_start:"),
-    st.Page("features/mixed.py", title="Mixed Model Analysis", url_path="/mixed_model", icon=":material/line_start:"),
     st.Page("features/medications.py", title="Medications", url_path="/medications", icon=":material/line_start:"),
     st.Page("features/diagnoses.py", title="Diagnoses", url_path="/diagnoses", icon=":material/line_start:"),
     st.Page("features/lab.py", title="Lab Results", url_path="/lab", icon=":material/line_start:"),
+    st.Page("mixed.py", title="Mixed Model Analysis", url_path="/mixed_model"),
 ])
 pg.run()

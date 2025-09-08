@@ -110,8 +110,8 @@ fig = go.Figure(
     ],
     layout=go.Layout(
         margin=dict(l=0,r=0,t=20,b=0),
-        xaxis=dict(title="Number of Outpatient Visits", range=[0, 50]),
-        yaxis=dict(title="Number of Inpatient + Emergency Visits", range=[0, 80]),
+        xaxis=dict(title="Number of Outpatient Visits", range=[0, 20]),
+        yaxis=dict(title="Number of Inpatient + Emergency Visits", range=[0, 30]),
         showlegend=True,
         legend=dict(
             yanchor="top",
@@ -189,4 +189,4 @@ correlation_chart = (heatmap + text).resolve_scale(color='independent')
 
 st.altair_chart(correlation_chart)
 
-render_navigation("features/admission.py", "features/mixed.py")
+render_navigation("features/admission.py", "features/medications.py")
