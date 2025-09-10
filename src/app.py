@@ -1,17 +1,16 @@
 import streamlit as st
+import pickle
 
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-
-from ucimlrepo import fetch_ucirepo
+# from ucimlrepo import fetch_ucirepo
 
 from helper import get_outcome_oh
 
 @st.cache_data
 def load_data():
-    return fetch_ucirepo(id=296)
+    # return fetch_ucirepo(id=296)
+    with open('src/assets/dataset.pkl', 'rb') as f:
+        dataset = pickle.load(f)
+    return dataset
 
 if "dataset" not in st.session_state:
     dataset = load_data()
