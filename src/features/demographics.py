@@ -271,7 +271,8 @@ def render_chi_square_test(selected_feature):
     st.text("Contingency table:")
     # Rename columns to avoid HTML formatting issues
     display_table = contingency_table.copy()
-    display_table.columns = [col.replace('<30', '&lt;30').replace('>30', '&gt;30') for col in display_table.columns]
+    display_table.columns = [col.replace('<', '&lt; ').replace('>', '&gt; ') for col in display_table.columns]
+    display_table.index = [index.replace('<', '&lt; ').replace('>', '&gt; ') for index in display_table.index]
     st.table(display_table.round().astype(int))
 
 render_chi_square_test(selected_feature)

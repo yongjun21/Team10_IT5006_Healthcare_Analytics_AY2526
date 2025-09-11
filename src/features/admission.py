@@ -26,7 +26,7 @@ def format_feature_name(feature):
     return feature[:-3].replace("_", " ").title()
 
 @st.cache_data
-def get_chart_data(outcome_by_feature, selected_feature, exclude_categories = []):
+def get_chart_data(outcome_by_feature, selected_feature):
     feature_order = outcome_by_feature.index.tolist()
 
     chart_data = outcome_by_feature.reset_index().melt(
