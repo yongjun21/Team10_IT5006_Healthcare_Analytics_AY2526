@@ -236,4 +236,4 @@ pca_components_chart = (pca_heatmap + pca_text).resolve_scale(color='independent
 
 st.altair_chart(pca_components_chart, use_container_width=True)
 
-render_navigation("features/quantitative.py", "features/diagnoses.py")
+render_navigation("features/numerical.py", "features/diagnoses.py")

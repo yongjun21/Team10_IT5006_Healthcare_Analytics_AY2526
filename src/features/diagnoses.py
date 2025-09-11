@@ -151,3 +151,6 @@ canvas[style*="width: 800px"] {
 """, unsafe_allow_html=True)
 
 st.altair_chart(heatmap + text, use_container_width=False, key="heatmap")
+
+
+render_navigation("features/medications.py", "features/lab.py")

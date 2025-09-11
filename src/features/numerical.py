@@ -11,7 +11,7 @@ from helper import render_navigation, get_scatter_data
 data = st.session_state.data
 outcome_oh = st.session_state.outcome_oh
 
-st.title("Feature Analysis - Quantitative Features")
+st.title("Feature Analysis - Numerical Features")
 
 
 st.subheader("Distribution of Length of Stay")
@@ -220,7 +220,7 @@ heatmap = alt.Chart(corr_df).mark_rect().encode(
 ).properties(
     width=600,
     height=600,
-    title='Correlation Heatmap of Quantitative Features'
+    title='Correlation Heatmap of Numerical Features'
 )
 
 # Add text annotations

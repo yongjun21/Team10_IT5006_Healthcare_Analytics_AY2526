@@ -115,4 +115,4 @@ elif chart_type == "Proportion":
     bars_pct = base_pct.mark_bar()
     st.altair_chart(bars_pct)
 
-render_navigation("features/demographics.py", "features/quantitative.py")
+render_navigation("features/demographics.py", "features/numerical.py")
