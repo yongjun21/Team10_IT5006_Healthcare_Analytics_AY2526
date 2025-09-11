@@ -5,7 +5,7 @@ import numpy as np
 
 from scipy.stats import chi2_contingency
 
-from helper import render_navigation, get_by_patient
+from helper import render_navigation, get_by_patient, get_outcome_by_feature
 
 data = st.session_state.data
 outcome_oh = st.session_state.outcome_oh
@@ -20,20 +20,6 @@ by_patient = st.session_state.by_patient
 
 demographic_weight = 1.0 / data["patient_nbr"].map(by_patient["encounters"])
 weighted_outcome_oh = outcome_oh.multiply(demographic_weight, axis=0)
-
-
-@st.cache_data
-def get_outcome_by_feature(data, weighted_outcome_oh, feature, sorted=False, patient_weighted=False):
-    # Group by feature and sum the weighted one-hot columns
-    outcome_by_feature = weighted_outcome_oh.groupby(data[feature]).sum(
-    ) if patient_weighted else data.groupby(feature)['readmitted'].value_counts().unstack(fill_value=0)
-
-    if not sorted:
-        return outcome_by_feature
-
-    # Sort by total counts if requested
-    counts = data[feature].value_counts().sort_values(ascending=False)
-    return outcome_by_feature.reindex(counts.index)
 
 @st.cache_data
 def get_chart_data(outcome_by_feature, selected_feature, exclude_categories = []):

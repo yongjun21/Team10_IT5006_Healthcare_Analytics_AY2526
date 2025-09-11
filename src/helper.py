@@ -34,6 +34,19 @@ def get_by_patient(data, outcome_oh):
     })
 
 @st.cache_data
+def get_outcome_by_feature(data, weighted_outcome_oh, feature, sorted=False, patient_weighted=False):
+    # Group by feature and sum the weighted one-hot columns
+    outcome_by_feature = weighted_outcome_oh.groupby(data[feature]).sum(
+    ) if patient_weighted else data.groupby(feature)['readmitted'].value_counts().unstack(fill_value=0)
+
+    if not sorted:
+        return outcome_by_feature
+
+    # Sort by total counts if requested
+    counts = data[feature].value_counts().sort_values(ascending=False)
+    return outcome_by_feature.reindex(counts.index)
+
+@st.cache_data
 def get_scatter_data(data, x_features, y_features):
     x_jitter = np.random.uniform(-0.5, 0.5, len(data))
     y_jitter = np.random.uniform(-0.5, 0.5, len(data))

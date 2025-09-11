@@ -122,5 +122,20 @@
       "cat": 29,
       "label": "Discharged/transferred to a Critical Access Hospital (CAH)"
     }
+  ],
+
+  "diagnosis_labels": [
+    { "cat": "250", "label": "Diabetes Mellitus" },
+    { "cat": "272", "label": "Disorders of lipoid metabolism" },
+    { "cat": "276", "label": "Fluid and electrolyte disorders" },
+    { "cat": "401", "label": "Essential hypertension" },
+    { "cat": "403", "label": "Hypertensive chronic kidney disease" },
+    { "cat": "414", "label": "Other forms of chronic ischemic heart disease" },
+    { "cat": "427", "label": "Cardiac dysrhythmias" },
+    { "cat": "428", "label": "Heart failure" },
+    { "cat": "486", "label": "Pneumonia, organism unspecified" },
+    { "cat": "496", "label": "Chronic airway obstruction" },
+    { "cat": "599", "label": "Urinary tract infection" },
+    { "cat": "786", "label": "Respiratory symptoms" }
   ]
 }

@@ -21,12 +21,13 @@ fig, ax = plt.subplots(figsize=(12, 6))
 jitter = np.random.uniform(-0.5, 0.5, len(data))
 # Ensure proper ordering: <30, >30, NO
 data_ordered = data.copy()
-data_ordered['readmitted'] = pd.Categorical(data_ordered['readmitted'], 
-                                           categories=['<30', '>30', 'NO'], 
-                                           ordered=True)
+data_ordered['readmitted'] = pd.Categorical(data_ordered['readmitted'],
+                                            categories=['<30', '>30', 'NO'],
+                                            ordered=True)
 
 st.markdown('##### Length of Stay Distribution by Readmission Status')
-sns.violinplot(data=data_ordered, x='readmitted', y=data_ordered['time_in_hospital'] + jitter, ax=ax)
+sns.violinplot(data=data_ordered, x='readmitted',
+               y=data_ordered['time_in_hospital'] + jitter, ax=ax)
 ax.set_xlabel('Readmission')
 ax.set_ylabel('Length of Stay (days)')
 st.pyplot(fig, use_container_width=False)
@@ -50,18 +51,21 @@ melted_data = data.melt(
 )
 
 # Add random jitter to reduce overlap
-melted_data['number_of_visits'] = melted_data['number_of_visits'] + np.random.uniform(-0.5, 0.5, len(melted_data))
+melted_data['number_of_visits'] = melted_data['number_of_visits'] + \
+    np.random.uniform(-0.5, 0.5, len(melted_data))
 
 filtered_melted = melted_data[melted_data['number_of_visits'] > 0]
-percentile_99 = filtered_melted.groupby('visit_type')['number_of_visits'].transform(lambda x: x.quantile(0.99))
-filtered_melted = filtered_melted[filtered_melted['number_of_visits'] <= percentile_99]
+percentile_99 = filtered_melted.groupby(
+    'visit_type')['number_of_visits'].transform(lambda x: x.quantile(0.99))
+filtered_melted = filtered_melted[filtered_melted['number_of_visits']
+                                  <= percentile_99]
 
 st.markdown('##### Distribution of Number of Past Visits by Readmission Status')
 for i, (visit_type, title) in enumerate(zip(visit_types, titles)):
     subset = filtered_melted[filtered_melted['visit_type'] == visit_type]
-    
-    sns.violinplot(data=subset, 
-                   x='readmitted', 
+
+    sns.violinplot(data=subset,
+                   x='readmitted',
                    y='number_of_visits',
                    ax=axes[i],
                    inner='box')
@@ -78,8 +82,10 @@ plt.close()
 
 st.subheader("Relation between Number of Past Visits and Readmission Outcome")
 
-x, y = get_scatter_data(data, ['number_outpatient'], ['number_inpatient', 'number_emergency'])
-hue = data['readmitted'].map({'<30': '#1f77b4', '>30': '#ff7f0e', 'NO': '#2ca02c'})
+x, y = get_scatter_data(data, ['number_outpatient'], [
+                        'number_inpatient', 'number_emergency'])
+hue = data['readmitted'].map(
+    {'<30': '#1f77b4', '>30': '#ff7f0e', 'NO': '#2ca02c'})
 
 fig = go.Figure(
     data=[
@@ -89,29 +95,27 @@ fig = go.Figure(
             marker=dict(size=3, color='#1f77b4'),
             name="<30",
             showlegend=True,
-            hoverinfo="skip"
         ),
         go.Scattergl(
-            x=x[hue == '#ff7f0e'], y=y[hue == '#ff7f0e'], 
+            x=x[hue == '#ff7f0e'], y=y[hue == '#ff7f0e'],
             mode="markers",
             marker=dict(size=3, color='#ff7f0e'),
             name=">30",
             showlegend=True,
-            hoverinfo="skip"
         ),
         go.Scattergl(
             x=x[hue == '#2ca02c'], y=y[hue == '#2ca02c'],
-            mode="markers", 
+            mode="markers",
             marker=dict(size=3, color='#2ca02c'),
             name="NO",
             showlegend=True,
-            hoverinfo="skip"
         )
     ],
     layout=go.Layout(
-        margin=dict(l=0,r=0,t=20,b=0),
+        margin=dict(l=0, r=0, t=20, b=0),
         xaxis=dict(title="Number of Outpatient Visits", range=[0, 20]),
-        yaxis=dict(title="Number of Inpatient + Emergency Visits", range=[0, 30]),
+        yaxis=dict(title="Number of Inpatient + Emergency Visits",
+                   range=[0, 30]),
         showlegend=True,
         legend=dict(
             yanchor="top",
@@ -122,17 +126,69 @@ fig = go.Figure(
     )
 )
 
-st.markdown('##### Scatter Plot of Number of Outpatient Visits vs Number of Inpatient + Emergency Visits')
+st.markdown(
+    '##### Scatter Plot of Number of Outpatient Visits vs Number of Inpatient + Emergency Visits')
+st.plotly_chart(fig, use_container_width=True)
+
+
+st.subheader(
+    "Relation between Number of Medications Prescribed and Length of Stay")
+
+x, y = get_scatter_data(data, ['num_medications'], ['time_in_hospital'])
+hue = data['readmitted'].map(
+    {'<30': '#1f77b4', '>30': '#ff7f0e', 'NO': '#2ca02c'})
+
+fig = go.Figure(
+    data=[
+        go.Scattergl(
+            x=x[hue == '#2ca02c'], y=y[hue == '#2ca02c'],
+            mode="markers",
+            marker=dict(size=3, color='#2ca02c'),
+            name="NO",
+            showlegend=True,
+        ),
+        go.Scattergl(
+            x=x[hue == '#ff7f0e'], y=y[hue == '#ff7f0e'],
+            mode="markers",
+            marker=dict(size=3, color='#ff7f0e'),
+            name=">30",
+            showlegend=True,
+        ),
+        go.Scattergl(
+            x=x[hue == '#1f77b4'], y=y[hue == '#1f77b4'],
+            mode="markers",
+            marker=dict(size=3, color='#1f77b4'),
+            name="<30",
+            showlegend=True,
+        )
+    ],
+    layout=go.Layout(
+        margin=dict(l=0, r=0, t=20, b=0),
+        xaxis=dict(title="Number of Medications Prescribed"),
+        yaxis=dict(title="Length of Stay (days)"),
+        showlegend=True,
+        legend=dict(
+            yanchor="top",
+            y=0.95,
+            xanchor="right",
+            x=0.95
+        )
+    )
+)
+
+st.markdown(
+    '##### Scatter Plot of Number of Outpatient Visits vs Number of Inpatient + Emergency Visits')
 st.plotly_chart(fig, use_container_width=True)
 
 
 st.subheader("Correlation Analysis")
 
 numeric_cols = ['time_in_hospital',
-                'number_outpatient', 'number_inpatient', 'number_emergency', 
+                'number_outpatient', 'number_inpatient', 'number_emergency',
                 'num_procedures', 'num_lab_procedures', 'num_medications', 'number_diagnoses']
 
-corr_matrix = pd.concat([outcome_oh["readmitted_<30"], data[numeric_cols]], axis=1).corr()
+corr_matrix = pd.concat([outcome_oh["readmitted_<30"],
+                        data[numeric_cols]], axis=1).corr()
 
 # Prepare data for Altair heatmap
 corr_data = []
@@ -155,8 +211,8 @@ heatmap = alt.Chart(corr_df).mark_rect().encode(
     y=alt.Y('feature2:N', title='Features', sort=feature_order,
             axis=alt.Axis(labelPadding=20, labelLimit=200)),
     color=alt.Color('correlation:Q',
-                    scale=alt.Scale(domain=[-0.5, 0.5], 
-                                   range=['#2166ac', '#f7f7f7', '#b2182b']),
+                    scale=alt.Scale(domain=[-0.5, 0.5],
+                                    range=['#2166ac', '#f7f7f7', '#b2182b']),
                     legend=alt.Legend(title='Correlation')),
     tooltip=[alt.Tooltip('feature1:N', title='Feature 1'),
              alt.Tooltip('feature2:N', title='Feature 2'),
