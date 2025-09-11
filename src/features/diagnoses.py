@@ -3,6 +3,7 @@ import altair as alt
 import pandas as pd
 import numpy as np
 import json
+import pickle
 
 from sklearn.decomposition import PCA
 
@@ -19,8 +20,7 @@ data["diag_1"] = pd.Categorical(data["diag_1"], categories=all_diag_categories)
 data["diag_2"] = pd.Categorical(data["diag_2"], categories=all_diag_categories)
 data["diag_3"] = pd.Categorical(data["diag_3"], categories=all_diag_categories)
 
-diag_value_counts = pd.concat(
-    [data["diag_1"], data["diag_2"], data["diag_3"]]).value_counts()
+diag_value_counts = pd.concat([data["diag_1"], data["diag_2"], data["diag_3"]]).value_counts()
 
 with open('src/assets/metadata.json', 'r') as f:
     metadata = json.load(f)
@@ -30,28 +30,31 @@ diagnosis_labels = {item["cat"]: item["label"]
 
 icd9_labels = pd.read_csv('src/assets/ICP9.csv', index_col='code')['diag']
 
-
 # Perform PCA on combined diagnosis binary encodings
 @st.cache_data
 def get_pca(data):
-    diag_1_oh = pd.get_dummies(data["diag_1"], dtype=int)
-    diag_2_oh = pd.get_dummies(data["diag_2"], dtype=int)
-    diag_3_oh = pd.get_dummies(data["diag_3"], dtype=int)
+    # diag_1_oh = pd.get_dummies(data["diag_1"], dtype=int)
+    # diag_2_oh = pd.get_dummies(data["diag_2"], dtype=int)
+    # diag_3_oh = pd.get_dummies(data["diag_3"], dtype=int)
 
-    # Combine diagnosis one-hot encodings with OR operation
-    diag_oh_combined = diag_1_oh | diag_2_oh | diag_3_oh
+    # # Combine diagnosis one-hot encodings with OR operation
+    # diag_oh_combined = diag_1_oh | diag_2_oh | diag_3_oh
 
-    # Create dataframe with patient numbers and diagnosis one-hot encodings
-    patient_diag_oh = pd.concat(
-        [data['patient_nbr'], diag_oh_combined], axis=1)
+    # # Create dataframe with patient numbers and diagnosis binary encodings
+    # patient_diag_oh = pd.concat(
+    #     [data['patient_nbr'], diag_oh_combined], axis=1)
 
-    # Group by patient and combine using max (equivalent to OR for binary values)
-    patient_grouped_diag_oh = patient_diag_oh.groupby('patient_nbr').max()
+    # patient_grouped_diag = patient_diag_oh.groupby('patient_nbr').max()
 
-    pca = PCA()
-    pca_result = pca.fit_transform(patient_grouped_diag_oh[diag_value_counts.index])
+    # diag_value_counts = pd.concat([data["diag_1"], data["diag_2"], data["diag_3"]]).value_counts()
 
-    return pca, pca_result
+    # pca = PCA()
+    # pca.fit_transform(patient_grouped_diag[diag_value_counts.index])
+
+    with open('src/assets/pca.pkl', 'rb') as f:
+        pca = pickle.load(f)
+
+    return pca
 
 
 # region
@@ -77,9 +80,9 @@ chart = alt.Chart(chart_data).mark_bar().encode(
 st.altair_chart(chart, use_container_width=True)
 
 
-st.subheader("PCA on Diagnosis Features")
+st.subheader("PCA on Patient Grouped Diagnosis Features")
 
-pca, pca_result = get_pca(data)
+pca = get_pca(data)
 
 cum_explained_var = np.cumsum(pca.explained_variance_ratio_)
 altair_df = pd.DataFrame({
@@ -92,15 +95,12 @@ chart = alt.Chart(altair_df).mark_line(point=True).encode(
     y=alt.Y('Cumulative Explained Variance Ratio',
             title='Cumulative Explained Variance Ratio')
 ).properties(
-    title='PCA on Combined Diagnosis Features',
     width=600,
     height=400
 ).interactive(bind_y=False)
 
+st.markdown("##### PCA Explained Variance Ratio")
 st.altair_chart(chart, use_container_width=True)
-
-
-st.subheader("PCA Components Composition")
 
 # Create DataFrame of first 30 PCA components
 diag_pca_components = pd.DataFrame(
@@ -145,12 +145,12 @@ text = heatmap.mark_text(baseline='middle').encode(
 
 st.markdown("""
 <style>
-canvas[style*="width: 800px"] {
+canvas[width="800"][height="800"] {
     margin-left: -70px;
 }
 """, unsafe_allow_html=True)
-
-st.altair_chart(heatmap + text, use_container_width=False, key="heatmap")
+st.markdown("##### PCA Components Composition")
+st.altair_chart(heatmap + text, use_container_width=False)
 
 
 render_navigation("features/medications.py", "features/lab.py")

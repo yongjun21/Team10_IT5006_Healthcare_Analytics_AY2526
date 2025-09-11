@@ -19,15 +19,13 @@ st.subheader("Distribution of Length of Stay")
 # Length of Stay violin plot
 fig, ax = plt.subplots(figsize=(12, 6))
 jitter = np.random.uniform(-0.5, 0.5, len(data))
-# Ensure proper ordering: <30, >30, NO
-data_ordered = data.copy()
-data_ordered['readmitted'] = pd.Categorical(data_ordered['readmitted'],
+data['readmitted'] = pd.Categorical(data['readmitted'],
                                             categories=['<30', '>30', 'NO'],
                                             ordered=True)
 
 st.markdown('##### Length of Stay Distribution by Readmission Status')
-sns.violinplot(data=data_ordered, x='readmitted',
-               y=data_ordered['time_in_hospital'] + jitter, ax=ax)
+sns.violinplot(data=data, x='readmitted',
+               y=data['time_in_hospital'] + jitter, ax=ax)
 ax.set_xlabel('Readmission')
 ax.set_ylabel('Length of Stay (days)')
 st.pyplot(fig, use_container_width=False)
