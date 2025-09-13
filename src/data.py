@@ -33,6 +33,8 @@ text = base.mark_text(
 
 st.altair_chart(bars + text)
 
+st.markdown("**Observation** The outcome distribution is imbalanced. The smallest of the three outcome classes  `< 30` makes up ~10% of the data points. This may not be an issue as this is a fairly large dataset so even the smallest class is sufficiently dense with 10k data points.")
+
 st.subheader("Completeness")
 st.text("Percentage of missing values")
 
@@ -60,5 +62,7 @@ text = base.mark_text(
 )
 
 st.altair_chart(bars + text)
+
+st.markdown("**Observation** The percentage of missing values for the demographics feature `weight` (97%) is quite high, reducing its usefulness in modeling. Lab result features `max_glu_serum` (95%) and `A1Cresult` (83%) also have significant missing values but could still be useful as they were the subject of study on the original paper. Other features with significant missing values are `medical_specialty` (49%) and `payer_code` (40%).")
 
 render_navigation("metadata.py", "patient.py")

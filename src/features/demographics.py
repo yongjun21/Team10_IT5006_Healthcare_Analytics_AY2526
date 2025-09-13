@@ -243,6 +243,8 @@ elif chart_type == "Mosaic With Pearson Residuals":
     mosaic_plot = base_mosaic.mark_rect() + text_labels
     st.altair_chart(mosaic_plot)
 
+st.markdown("**Observation** Visualizing the outcome distribution (in %) for different race groups, we can see\n- `race` is a factor likely contributing to the difference in outcome. Caucasian (which is the largest group) are more likely to be readmitted than other races.\n- `gender` does not show as strong an effect on outcome as compared to race.\n- The effect of `age` on outcome appears significant. The crude relation seems to be that older patients are more likely to be readmitted than younger ones.")
+
 st.markdown(f"##### Chi-square test for {selected_feature.title()} vs Readmission Outcome")
 
 def render_chi_square_test(selected_feature):
@@ -276,6 +278,8 @@ def render_chi_square_test(selected_feature):
     st.table(display_table.round().astype(int))
 
 render_chi_square_test(selected_feature)
+
+st.markdown("**Observation** All three demographic factors individually show statistical significance in its effect on outcome. Even `gender` that is the least statistically significant factor among the three has rather low p-value at 0.0036.")
 
 st.subheader("Interaction Effect Between Demographics Features")
 
@@ -322,5 +326,9 @@ def render_interaction_effect(first_feature, second_feature):
     st.altair_chart(chart, use_container_width=True)
 
 render_interaction_effect(first_feature, second_feature)
+
+st.markdown("**Observation**")
+st.markdown("The interaction plot between `race` and `gender` shows additive contribution is not sufficient for outcome prediction. Readmission risk is significantly higher for males in the Hispanic and Asian groups than observed in the population mean. Though we need to be careful in drawing conclusions as the proportion of these race groups are small hence more susceptible to sampling bias.")
+st.markdown("The combination of `age` and `race` factors shows likely non-additive effects also. Considering just the two largest race groups (Caucasians & African Americans) to avoid sampling bias, we can see the effect curves are mostly not parallel indicating factors interaction.")
 
 render_navigation("features/index.py", "features/admission.py")

@@ -122,4 +122,6 @@ render_distribution_chart(data, "A1Cresult", chart_type_2, "A1C Result")
 
 render_chi_square_test("A1Cresult")
 
+st.markdown("**Observation** Chi Square Test shows both `max_glu_serum` and `A1Cresult` have statistically significant effect on readmission risk.")
+
 render_navigation("features/diagnoses.py", "mixed.py")

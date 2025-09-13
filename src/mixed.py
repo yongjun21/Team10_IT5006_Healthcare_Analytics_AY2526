@@ -130,6 +130,8 @@ def render_icc_chart(icc_results):
 
 st.title("Mixed Model Analysis")
 
+st.text("Mixed Model Analysis allows us to study how much unaccounted patient level differences influence outcomes thus guiding modelling approach.")
+
 # progress_bar = st.progress(0.0)
 
 # icc_results = {}
@@ -147,6 +149,8 @@ chart = render_icc_chart(icc_results_los)
 
 st.markdown('##### ICC for Length of Stay by Predictor')
 st.altair_chart(chart, use_container_width=True)
+
+st.markdown("**Observation** For predicting length of stay, the null model's intraclass correlation coefficient is rather high at 0.19. This value did not go down significantly when we add fixed effects to the model. In fact ICC goes up when we add in the number of procedures or number of medications as fixed effects. This shows factors like the number of medications only help explain within group variation but have smaller or no effect on between group variation. Thus patient level differences persist and if not accounted for in modelling will lead to inflation of the other model features’ fixed effects.")
 
 # progress_bar = st.progress(0.0)
 
@@ -167,6 +171,8 @@ chart = render_icc_chart(icc_results_readmitted)
 
 st.markdown('##### ICC for Readmitted in less than 30 days by Predictor')
 st.altair_chart(chart, use_container_width=True)
+
+st.markdown("**Observation** The story is different for prediction of readmission risk. The null model's ICC is relatively low at 0.07. After including the number of past inpatient visits as fixed effect, ICC shrinks to 0.016. Thus we are able to account for most of the between group variation so patient level differences can be ignored without much impact to model generalizability, robustness and interpretability.")
 
 
 render_navigation("features/lab.py", None)

@@ -62,8 +62,11 @@ chart = alt.Chart(chart_data).mark_bar().encode(
     height=600
 )
 
-st.markdown(f'##### Medication Usage Rates by Readmission Outcome')
+st.markdown(f'##### Medication Usage Rates And Readmission Outcome')
 st.altair_chart(chart)
+
+st.markdown("**Observation** The most common medication prescribed is insulin (> 50% of the time) which isn't surprising for a study focused on diabetic patients. The usage chart has a long tail: most usage concentrated in the top 10 prescribed medications while the rest appears < 1% of the time.")
+
 
 st.subheader("Outcome Comparison")
 
@@ -235,5 +238,9 @@ pca_text = pca_heatmap.mark_text(baseline='middle').encode(
 pca_components_chart = (pca_heatmap + pca_text).resolve_scale(color='independent')
 
 st.altair_chart(pca_components_chart, use_container_width=True)
+
+st.markdown("**Observation**")
+st.markdown("The component composition chart shows some interesting patterns that confirm some of our earlier observations on the correlation heatmap. The first principal component (PC) is almost exclusively the effect of insulin showing insulin is indeed often used independently. The clustering of composition weights for PC2, PC3 and PC4 shows two distinct usage patterns: 1. using glipizide but not glyburide and 2. using glipizide together with glyburide. Similar patterns can be observed in the PC5 & PC6 cluster. Thus PCA proves to be useful in identifying usage patterns even in the absence of domain knowledge.")
+st.markdown("The concentration of composition weights along the diagonal with medications sorted by usage suggests the dominance of prevalence effect. But some clustering can still be observed. The dominance of insulin usage and long tail effect explains why just the first 7 principal components cover > 95% of data variance.")
 
 render_navigation("features/numerical.py", "features/diagnoses.py")

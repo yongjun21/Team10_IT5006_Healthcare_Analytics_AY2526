@@ -45,4 +45,6 @@ rep_max_patient_data = data[data["patient_nbr"] == rep_max_patient]
 
 st.dataframe(rep_max_patient_data)
 
+st.markdown("**Observation** Even though the data unit in this study is the hospitalization encounter, it is useful to also analyze from the perspective of the patient. There were significant repeated appearances of the same patient within the dataset with the largest count at 40. The ~100K hospitalization encounters are distributed between ~70K patients. With the distribution of repeated patient encounters exhibiting a power law relationship. Because certain features like demographic features are duplicated within encounters for a single patient while others like number of past visits, prescribed medications etc are highly correlated, the implication for modelling is:\n1. Train/Test split should avoid information leakage via patient (i.e. the same patient should not be in both train and test set)\n2. Mixed Model approach might be useful here to separate out the effect of patient level differences from the true effect of individual factors.")
+
 render_navigation("data.py", "features/index.py")

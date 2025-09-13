@@ -82,6 +82,8 @@ st.altair_chart(chart, use_container_width=True)
 
 st.subheader("PCA on Patient Grouped Diagnosis Features")
 
+st.markdown("Diagnosis columns have more than 900 categories with a long tail distribution. For this information to be used in modelling, it makes sense to shrink the large degrees of freedom with some dimension reduction. To help with the identification of clusters, we combine the 3 diagnosis columns (ignoring whether it is the primary, secondary, or additional diagnosis) into one set of binary encodings with the OR operation then further combining along the patient axis (i.e. consider all diagnoses that a patient has ever received). PCA analysis is then performed on this combined binary encoding set.")
+
 pca = get_pca(data)
 
 cum_explained_var = np.cumsum(pca.explained_variance_ratio_)
@@ -145,12 +147,15 @@ text = heatmap.mark_text(baseline='middle').encode(
 
 st.markdown("""
 <style>
-canvas[width="800"][height="800"] {
+canvas[width="800"][height="800"],
+canvas[width="1600"][height="1600"] {
     margin-left: -70px;
 }
 """, unsafe_allow_html=True)
 st.markdown("##### PCA Components Composition")
 st.altair_chart(heatmap + text, use_container_width=False)
+
+st.markdown("**Observation** With more categories to account for, less variation is captured by individual principal component (PC). The first 100 PCs account for only ~80% of the variation. Composition weights concentrate along the diagonal though clustering can still be seen from the significant spread of weights around the diagonal. Some of the clusters like PC1-4 and PC8-12 cut across different ICD9 categories (first char of ICD9 code) which shows that following the hierarchical grouping of ICD9 may not be the best approach to capture data variation.")
 
 
 render_navigation("features/medications.py", "features/lab.py")

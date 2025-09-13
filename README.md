@@ -9,3 +9,8 @@ source env/bin/activate
 
 pip install -r requirements.txt
 ```
+
+## Start Streamlit
+```bash
+streamlit run src/app.py
+```

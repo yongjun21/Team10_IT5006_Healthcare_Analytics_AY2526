@@ -115,4 +115,7 @@ elif chart_type == "Proportion":
     bars_pct = base_pct.mark_bar()
     st.altair_chart(bars_pct)
 
+st.markdown("**Observation**")
+st.markdown("Admission Type, Admission Source & Discharge Disposition likely all contributed to difference in readmission outcome.\n- For Admission Type going from elective to urgent to emergency increases the likelihood of readmission.\n- For Admission Source going from hospital transfers to physician referrals to emergency room admission increases readmission likelihood.\n- For Discharge Disposition going from discharged to home to discharge to home with health service to discharged to skilled nursing facilities increases readmission likelihood within 30 days.")
+
 render_navigation("features/demographics.py", "features/numerical.py")
