@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import requests
 import pickle
 
 # from ucimlrepo import fetch_ucirepo
@@ -10,8 +11,8 @@ from helper import get_outcome_oh, convert_to_category
 @st.cache_data
 def load_data():
     # return fetch_ucirepo(id=296)
-    with open('src/assets/dataset.pkl', 'rb') as f:
-        dataset = pickle.load(f)
+    response = requests.get('https://assets.yongjun.sg/diabetes_dataset.pkl')
+    dataset = pickle.loads(response.content)
     return dataset
 
 
