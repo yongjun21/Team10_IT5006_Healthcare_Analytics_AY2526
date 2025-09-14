@@ -17,11 +17,6 @@ labels = {
     "discharge_disposition_id": {item['cat']: item['label'] for item in metadata['discharge_disposition_labels']}
 }
 
-data["admission_type_id"] = data["admission_type_id"].astype('category')
-data["admission_source_id"] = data["admission_source_id"].astype('category')
-data["discharge_disposition_id"] = data["discharge_disposition_id"].astype(
-    'category')
-
 def format_feature_name(feature):
     return feature[:-3].replace("_", " ").title()
 

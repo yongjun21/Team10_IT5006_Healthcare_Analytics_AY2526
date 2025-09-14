@@ -11,15 +11,6 @@ from helper import render_navigation
 
 data = st.session_state.data
 
-# Combine all unique diagnosis values from diag_1, diag_2, and diag_3
-all_diag_categories = pd.concat(
-    [data["diag_1"], data["diag_2"], data["diag_3"]]).unique()
-# Remove None/NaN values from categories
-all_diag_categories = all_diag_categories[pd.notna(all_diag_categories)]
-data["diag_1"] = pd.Categorical(data["diag_1"], categories=all_diag_categories)
-data["diag_2"] = pd.Categorical(data["diag_2"], categories=all_diag_categories)
-data["diag_3"] = pd.Categorical(data["diag_3"], categories=all_diag_categories)
-
 diag_value_counts = pd.concat([data["diag_1"], data["diag_2"], data["diag_3"]]).value_counts()
 
 with open('src/assets/metadata.json', 'r') as f:
@@ -77,7 +68,7 @@ chart = alt.Chart(chart_data).mark_bar().encode(
     height=400
 )
 
-st.altair_chart(chart, use_container_width=True)
+st.altair_chart(chart)
 
 
 st.subheader("PCA on Patient Grouped Diagnosis Features")
@@ -102,7 +93,7 @@ chart = alt.Chart(altair_df).mark_line(point=True).encode(
 ).interactive(bind_y=False)
 
 st.markdown("##### PCA Explained Variance Ratio")
-st.altair_chart(chart, use_container_width=True)
+st.altair_chart(chart)
 
 # Create DataFrame of first 30 PCA components
 diag_pca_components = pd.DataFrame(

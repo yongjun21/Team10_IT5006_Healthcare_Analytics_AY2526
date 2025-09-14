@@ -10,10 +10,6 @@ from helper import render_navigation, get_by_patient, get_outcome_by_feature
 data = st.session_state.data
 outcome_oh = st.session_state.outcome_oh
 
-data["race"] = data["race"].astype('category')
-data["gender"] = data["gender"].astype('category')
-data["age"] = data["age"].astype('category')
-
 if "by_patient" not in st.session_state:
     st.session_state.by_patient = get_by_patient(data, outcome_oh)
 by_patient = st.session_state.by_patient
@@ -323,7 +319,7 @@ def render_interaction_effect(first_feature, second_feature):
     ).interactive()
     
     st.markdown(f'##### {first_feature.title()} and {second_feature.title()} Interaction on Readmission in less than 30 days')
-    st.altair_chart(chart, use_container_width=True)
+    st.altair_chart(chart)
 
 render_interaction_effect(first_feature, second_feature)
 

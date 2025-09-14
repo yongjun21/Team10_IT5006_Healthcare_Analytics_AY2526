@@ -98,7 +98,7 @@ norm_chart = alt.Chart(filtered_chart_data).mark_bar().encode(
 )
 
 st.markdown(f'##### Distribution of Readmission Outcome when Medication is Prescribed')
-st.altair_chart(norm_chart, use_container_width=True)
+st.altair_chart(norm_chart)
 
 
 st.subheader("Correlation Analysis")
@@ -157,7 +157,7 @@ text = heatmap.mark_text(baseline='middle').encode(
 st.markdown('##### Medication Co-occurrence Correlation Matrix')
 st.text("Includes outcome variables")
 correlation_chart = (heatmap + text).resolve_scale(color='independent')
-st.altair_chart(correlation_chart, use_container_width=True)
+st.altair_chart(correlation_chart)
 
 
 st.subheader("PCA Analysis")
@@ -188,7 +188,7 @@ pca_chart = alt.Chart(pca_data).mark_line(point=True, strokeWidth=3).encode(
 )
 
 st.markdown('##### PCA Explained Variance Ratio')
-st.altair_chart(pca_chart, use_container_width=True)
+st.altair_chart(pca_chart)
 
 # Create a DataFrame with PCA components
 pca_components = pd.DataFrame(
@@ -237,7 +237,7 @@ pca_text = pca_heatmap.mark_text(baseline='middle').encode(
 # Combine heatmap and text
 pca_components_chart = (pca_heatmap + pca_text).resolve_scale(color='independent')
 
-st.altair_chart(pca_components_chart, use_container_width=True)
+st.altair_chart(pca_components_chart)
 
 st.markdown("**Observation**")
 st.markdown("The component composition chart shows some interesting patterns that confirm some of our earlier observations on the correlation heatmap. The first principal component (PC) is almost exclusively the effect of insulin showing insulin is indeed often used independently. The clustering of composition weights for PC2, PC3 and PC4 shows two distinct usage patterns: 1. using glipizide but not glyburide and 2. using glipizide together with glyburide. Similar patterns can be observed in the PC5 & PC6 cluster. Thus PCA proves to be useful in identifying usage patterns even in the absence of domain knowledge.")

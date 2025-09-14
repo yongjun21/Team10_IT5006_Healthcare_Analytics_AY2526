@@ -28,7 +28,7 @@ sns.violinplot(data=data, x='readmitted',
                y=data['time_in_hospital'] + jitter, ax=ax)
 ax.set_xlabel('Readmission')
 ax.set_ylabel('Length of Stay (days)')
-st.pyplot(fig, use_container_width=False)
+st.pyplot(fig)
 plt.close()
 
 st.markdown("**Observation** The mean length of stay is different across different outcome groups indicating length of stay could be used as a predictor for readmission risk.")
@@ -123,7 +123,7 @@ fig = go.Figure(
 
 st.markdown(
     '##### Scatter Plot of Number of Outpatient Visits vs Number of Inpatient + Emergency Visits')
-st.plotly_chart(fig, use_container_width=True)
+st.plotly_chart(fig, width="stretch")
 
 st.markdown("**Observation** Number of past inpatient visits does not seem to be strongly correlated with number of past outpatient visits. Looking at extreme values, it is more likely to have a patient high in past inpatient visits and moderate in past outpatient visits or vice versa than having a patient that is concurrently high in both (downward sloping scatter plot). Considered together, more past visits (inpatient or outpatient) do increase readmission risk. The effect is strongest for inpatient visits. Whether the visit was an emergency one may not be an important factor as the data for emergency visits are rather sparse so not sufficient to draw any conclusion.")
 
@@ -176,7 +176,7 @@ fig = go.Figure(
 
 st.markdown(
     '##### Scatter Plot of Number of Outpatient Visits vs Number of Inpatient + Emergency Visits')
-st.plotly_chart(fig, use_container_width=True)
+st.plotly_chart(fig, width="stretch")
 
 st.markdown("**Observation** Length of Stay seems to be strongly correlated with the Number of Medications prescribed (upward sloping scatter plot). While this suggests that the number of medications prescribed could be used as a predictor for length of stay, it does not imply causality.")
 

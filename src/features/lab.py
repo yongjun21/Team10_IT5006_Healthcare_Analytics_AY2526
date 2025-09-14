@@ -8,9 +8,6 @@ from helper import render_navigation, get_outcome_by_feature
 
 data = st.session_state.data
 
-data["max_glu_serum"] = data["max_glu_serum"].astype('category')
-data["A1Cresult"] = data["A1Cresult"].astype('category')
-
 data["max_glu_serum"] = data["max_glu_serum"].cat.reorder_categories(['Norm', '>200', '>300'])
 data["A1Cresult"] = data["A1Cresult"].cat.reorder_categories(['Norm', '>7', '>8'])
 

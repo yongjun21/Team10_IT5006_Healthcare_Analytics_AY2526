@@ -2,6 +2,11 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
+def convert_to_category(data, columns):
+    for column in columns:
+        data[column] = data[column].astype('category')
+    return data
+
 def render_navigation(previous_page, next_page):
     st.markdown("---")
 
