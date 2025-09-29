@@ -63,7 +63,6 @@ def render_distribution_chart(data, selected_feature, chart_type, title):
                     scale=alt.Scale(domain=[0, 1])),
             y=alt.Y(f'{selected_feature}:O',
                     title=title,
-                    axis=alt.Axis(format='%'),
                     sort=feature_order),
             color=alt.Color('readmitted:N',
                             scale=alt.Scale(domain=['<30', '>30', 'NO'],
@@ -111,7 +110,7 @@ st.markdown(f"##### Chi-square test for Max Glucose in Serum vs Readmission Outc
 render_chi_square_test("max_glu_serum")
 
 
-st.subheader("Distribution of Readmitted by Max Glucose in Serum")
+st.subheader("Distribution of Readmitted by A1C Result")
 
 chart_type_2 = st.selectbox("View As", ["Count", "Proportion"], key="A1Cresult")
 
