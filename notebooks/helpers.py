@@ -12,6 +12,15 @@ from sklearn.metrics import (
 import statsmodels.stats.api as sms
 
 import time
+import requests
+import pickle
+
+
+def load_data():
+    # return fetch_ucirepo(id=296)
+    response = requests.get('https://assets.yongjun.sg/diabetes_dataset.pkl')
+    dataset = pickle.loads(response.content)
+    return dataset
 
 
 def evaluate_model(get_model, train_X, train_y, test_X, test_y, get_decision_score=None):
@@ -24,12 +33,16 @@ def evaluate_model(get_model, train_X, train_y, test_X, test_y, get_decision_sco
     train_pred = model.predict(train_X)
     test_pred = model.predict(test_X)
 
+    train_accuracy = accuracy_score(train_y, train_pred)
+    test_accuracy = accuracy_score(test_y, test_pred)
+
     results = {
         "model": model,
         "train_pred": train_pred,
         "test_pred": test_pred,
-        "train_accuracy": accuracy_score(train_y, train_pred),
-        "test_accuracy": accuracy_score(test_y, test_pred),
+        "train_accuracy": train_accuracy,
+        "test_accuracy": test_accuracy,
+        "overfitting_accuracy": train_accuracy - test_accuracy,
         "train_precision_score": precision_score(train_y, train_pred),
         "test_precision_score": precision_score(test_y, test_pred),
         "train_recall_score": recall_score(train_y, train_pred),
@@ -57,6 +70,7 @@ def evaluate_model(get_model, train_X, train_y, test_X, test_y, get_decision_sco
         results["test_decision_score"] = test_decision_score
         results["train_roc_auc"] = auc(train_fpr, train_tpr)
         results["test_roc_auc"] = auc(test_fpr, test_tpr)
+        results["overfitting_auc"] = results["train_roc_auc"] - results["test_roc_auc"]
         results["train_pr_auc"] = auc(train_recall, train_precision)
         results["test_pr_auc"] = auc(test_recall, test_precision)
         results["train_roc_curve"] = train_fpr, train_tpr
@@ -71,6 +85,7 @@ def cv_evaluate_model(get_model, train_Xs, train_ys, test_Xs, test_ys, get_decis
     results = []
     train_accuracy = []
     test_accuracy = []
+    overfitting_accuracy = []
     train_precision_score = []
     test_precision_score = []
     train_recall_score = []
@@ -80,6 +95,7 @@ def cv_evaluate_model(get_model, train_Xs, train_ys, test_Xs, test_ys, get_decis
     training_time = []
     train_roc_auc = []
     test_roc_auc = []
+    overfitting_auc = []
     train_pr_auc = []
     test_pr_auc = []
 
@@ -94,6 +110,7 @@ def cv_evaluate_model(get_model, train_Xs, train_ys, test_Xs, test_ys, get_decis
         results.append(result)
         train_accuracy.append(result["train_accuracy"])
         test_accuracy.append(result["test_accuracy"])
+        overfitting_accuracy.append(result["overfitting_accuracy"])
         train_precision_score.append(result["train_precision_score"])
         test_precision_score.append(result["test_precision_score"])
         train_recall_score.append(result["train_recall_score"])
@@ -104,12 +121,14 @@ def cv_evaluate_model(get_model, train_Xs, train_ys, test_Xs, test_ys, get_decis
         if result.get("train_decision_score") is not None:
             train_roc_auc.append(result["train_roc_auc"])
             test_roc_auc.append(result["test_roc_auc"])
+            overfitting_auc.append(result["overfitting_auc"])
             train_pr_auc.append(result["train_pr_auc"])
             test_pr_auc.append(result["test_pr_auc"])
 
     compiled["results"] = results
     compiled["train_accuracy"] = get_metric_stats(train_accuracy)
     compiled["test_accuracy"] = get_metric_stats(test_accuracy)
+    compiled["overfitting_accuracy"] = get_metric_stats(overfitting_accuracy)
     compiled["train_precision_score"] = get_metric_stats(train_precision_score)
     compiled["test_precision_score"] = get_metric_stats(test_precision_score)
     compiled["train_recall_score"] = get_metric_stats(train_recall_score)
@@ -120,6 +139,7 @@ def cv_evaluate_model(get_model, train_Xs, train_ys, test_Xs, test_ys, get_decis
     if get_decision_score is not None:
         compiled["train_roc_auc"] = get_metric_stats(train_roc_auc)
         compiled["test_roc_auc"] = get_metric_stats(test_roc_auc)
+        compiled["overfitting_auc"] = get_metric_stats(overfitting_auc)
         compiled["train_pr_auc"] = get_metric_stats(train_pr_auc)
         compiled["test_pr_auc"] = get_metric_stats(test_pr_auc)
 
