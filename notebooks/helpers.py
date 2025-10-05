@@ -85,8 +85,11 @@ def cv_evaluate_model(get_model, train_Xs, train_ys, test_Xs, test_ys, get_decis
 
     compiled = {}
 
+    fold = 0
     for train_X, train_y, test_X, test_y in zip(train_Xs, train_ys, test_Xs, test_ys):
         result = evaluate_model(get_model, train_X, train_y, test_X, test_y, get_decision_score)
+        print(f"Trained fold {fold} in {result['training_time']:.2f}s")
+        fold += 1
 
         results.append(result)
         train_accuracy.append(result["train_accuracy"])
