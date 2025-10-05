@@ -256,6 +256,72 @@ class MixedNaiveBayes:
     def predict(self, X):
         proba = self.predict_proba(X)
         return np.argmax(proba, axis=1)
+    
+    def get_log_likelihood(self, X):
+        """
+        Get log likelihood as a single 2D array with shape (n_features, n_classes).
+        
+        Parameters:
+        -----------
+        X : array-like, shape (n_samples, n_features)
+            Input samples
+            
+        Returns:
+        --------
+        log_likelihood : array
+            Array of shape (n_features, n_classes) with log likelihoods
+        """
+        n_features = X.shape[1]
+        n_classes = 2  # Assuming binary classification
+        
+        # Initialize the result array
+        log_likelihood = np.zeros((n_features, n_classes))
+        
+        if self.binary_model is not None:
+            X_binary = X[:, self.binary_features]
+            binary_log_probs = self.binary_model.predict_log_proba(X_binary)
+            
+            # For each binary feature, calculate its individual contribution
+            for i, feature_idx in enumerate(self.binary_features):
+                feature_values = X[:, feature_idx]
+                for class_idx in range(binary_log_probs.shape[1]):
+                    # Calculate log likelihood for this feature
+                    if hasattr(self.binary_model, 'feature_log_prob_'):
+                        # Use the feature log probabilities from the trained model
+                        feature_log_prob = self.binary_model.feature_log_prob_[class_idx, i]
+                        # For binary features, this is the log probability of the feature being 1
+                        # We need to adjust based on the actual feature values
+                        log_likelihood_contrib = np.where(feature_values == 1, 
+                                                         feature_log_prob, 
+                                                         1 - np.exp(feature_log_prob))
+                        log_likelihood[feature_idx, class_idx] = np.mean(log_likelihood_contrib)
+                    else:
+                        # Fallback: use the overall log probabilities divided by number of features
+                        log_likelihood[feature_idx, class_idx] = np.mean(binary_log_probs[:, class_idx]) / len(self.binary_features)
+            
+        if self.continuous_model is not None:
+            X_continuous = X[:, self.continuous_features]
+            continuous_log_probs = self.continuous_model.predict_log_proba(X_continuous)
+            
+            # For each continuous feature, calculate its individual contribution
+            for i, feature_idx in enumerate(self.continuous_features):
+                feature_values = X[:, feature_idx]
+                for class_idx in range(continuous_log_probs.shape[1]):
+                    # Get the parameters for this feature and class
+                    if hasattr(self.continuous_model, 'theta_') and hasattr(self.continuous_model, 'sigma_'):
+                        # Use the mean and variance from the trained model
+                        mean = self.continuous_model.theta_[class_idx, i]
+                        var = self.continuous_model.sigma_[class_idx, i]
+                        
+                        # Calculate log likelihood for this feature using Gaussian distribution
+                        log_likelihood_contrib = -0.5 * (np.log(2 * np.pi * var) + 
+                                                        ((feature_values - mean) ** 2) / var)
+                        log_likelihood[feature_idx, class_idx] = np.mean(log_likelihood_contrib)
+                    else:
+                        # Fallback: use the overall log probabilities divided by number of features
+                        log_likelihood[feature_idx, class_idx] = np.mean(continuous_log_probs[:, class_idx]) / len(self.continuous_features)
+        
+        return log_likelihood
 
 
 class LossTracker:

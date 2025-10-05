@@ -8,6 +8,9 @@ from sklearn.metrics import (
     precision_recall_curve,
     auc
 )
+
+import statsmodels.stats.api as sms
+
 import time
 
 
@@ -63,3 +66,63 @@ def evaluate_model(get_model, train_X, train_y, test_X, test_y, get_decision_sco
 
     return results
 
+
+def cv_evaluate_model(get_model, train_Xs, train_ys, test_Xs, test_ys, get_decision_score=None):
+    results = []
+    train_accuracy = []
+    test_accuracy = []
+    train_precision_score = []
+    test_precision_score = []
+    train_recall_score = []
+    test_recall_score = []
+    train_f1 = []
+    test_f1 = []
+    training_time = []
+    train_roc_auc = []
+    test_roc_auc = []
+    train_pr_auc = []
+    test_pr_auc = []
+
+    compiled = {}
+
+    for train_X, train_y, test_X, test_y in zip(train_Xs, train_ys, test_Xs, test_ys):
+        result = evaluate_model(get_model, train_X, train_y, test_X, test_y, get_decision_score)
+
+        results.append(result)
+        train_accuracy.append(result["train_accuracy"])
+        test_accuracy.append(result["test_accuracy"])
+        train_precision_score.append(result["train_precision_score"])
+        test_precision_score.append(result["test_precision_score"])
+        train_recall_score.append(result["train_recall_score"])
+        test_recall_score.append(result["test_recall_score"])
+        train_f1.append(result["train_f1"])
+        test_f1.append(result["test_f1"])
+        training_time.append(result["training_time"])
+        if result.get("train_decision_score") is not None:
+            train_roc_auc.append(result["train_roc_auc"])
+            test_roc_auc.append(result["test_roc_auc"])
+            train_pr_auc.append(result["train_pr_auc"])
+            test_pr_auc.append(result["test_pr_auc"])
+
+    compiled["results"] = results
+    compiled["train_accuracy"] = get_metric_stats(train_accuracy)
+    compiled["test_accuracy"] = get_metric_stats(test_accuracy)
+    compiled["train_precision_score"] = get_metric_stats(train_precision_score)
+    compiled["test_precision_score"] = get_metric_stats(test_precision_score)
+    compiled["train_recall_score"] = get_metric_stats(train_recall_score)
+    compiled["test_recall_score"] = get_metric_stats(test_recall_score)
+    compiled["train_f1"] = get_metric_stats(train_f1)
+    compiled["test_f1"] = get_metric_stats(test_f1)
+    compiled["training_time"] = get_metric_stats(training_time)
+    if get_decision_score is not None:
+        compiled["train_roc_auc"] = get_metric_stats(train_roc_auc)
+        compiled["test_roc_auc"] = get_metric_stats(test_roc_auc)
+        compiled["train_pr_auc"] = get_metric_stats(train_pr_auc)
+        compiled["test_pr_auc"] = get_metric_stats(test_pr_auc)
+
+    return compiled
+
+
+def get_metric_stats(data):
+    lb, ub = sms.DescrStatsW(data).tconfint_mean()
+    return 0.5 * lb + 0.5 * ub, (lb, ub)
