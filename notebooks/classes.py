@@ -442,7 +442,7 @@ class LossTracker:
         final_train_loss_per_sample = self.train_loss_history[-1] / n_train
         final_test_loss_per_sample = self.test_loss_history[-1] / n_test
         
-        overfitting_gap = final_train_loss_per_sample - final_test_loss_per_sample
+        overfitting_gap = final_test_loss_per_sample - final_train_loss_per_sample
         overfitting_ratio = (overfitting_gap / final_test_loss_per_sample * 100) if final_test_loss_per_sample > 0 else 0
         
         return {
