@@ -4,6 +4,7 @@ from sklearn.naive_bayes import BernoulliNB, GaussianNB
 from sklearn.utils.validation import check_X_y, check_array
 from sklearn.utils.class_weight import compute_class_weight
 from scipy.optimize import minimize
+from scipy import stats
 
 class CustomLogisticRegression(BaseEstimator, ClassifierMixin):
     """
@@ -30,6 +31,26 @@ class CustomLogisticRegression(BaseEstimator, ClassifierMixin):
         z = np.clip(z, -500, 500)
         return 1 / (1 + np.exp(-z))
     
+    def _get_class_weights(self, y):
+        """Calculate class weights for given labels"""
+        if self.class_weight is None:
+            return None
+        
+        if isinstance(self.class_weight, dict):
+            # Dictionary format: {class_label: weight}
+            weights = np.array([self.class_weight.get(label, 1.0) for label in y])
+        elif isinstance(self.class_weight, str) and self.class_weight == 'balanced':
+            # Balanced weights: n_samples / (n_classes * np.bincount(y))
+            classes = np.unique(y)
+            class_weights = compute_class_weight('balanced', classes=classes, y=y)
+            weight_dict = dict(zip(classes, class_weights))
+            weights = np.array([weight_dict[label] for label in y])
+        else:
+            # List/array format
+            weights = np.array(self.class_weight)
+        
+        return weights
+    
     def _log_likelihood(self, X, y, params):
         """Calculate weighted log-likelihood"""
         z = np.dot(X, params)
@@ -40,21 +61,8 @@ class CustomLogisticRegression(BaseEstimator, ClassifierMixin):
         log_likelihood = y * np.log(probs) + (1 - y) * np.log(1 - probs)
         
         # Apply class weights if specified
-        if self.class_weight is not None:
-            if isinstance(self.class_weight, dict):
-                # Dictionary format: {class_label: weight}
-                weights = np.array([self.class_weight.get(label, 1.0) for label in y])
-            elif isinstance(self.class_weight, str) and self.class_weight == 'balanced':
-                # Balanced weights: n_samples / (n_classes * np.bincount(y))
-                classes = np.unique(y)
-                class_weights = compute_class_weight('balanced', classes=classes, y=y)
-                weight_dict = dict(zip(classes, class_weights))
-                weights = np.array([weight_dict[label] for label in y])
-            else:
-                # List/array format
-                weights = np.array(self.class_weight)
-            
-            # Apply weights to log-likelihood
+        weights = self._get_class_weights(y)
+        if weights is not None:
             log_likelihood = weights * log_likelihood
         
         return np.sum(log_likelihood)
@@ -101,20 +109,8 @@ class CustomLogisticRegression(BaseEstimator, ClassifierMixin):
         grad_nll = -np.dot(X.T, y - probs)
         
         # Apply class weights if specified
-        if self.class_weight is not None:
-            if isinstance(self.class_weight, dict):
-                # Dictionary format: {class_label: weight}
-                weights = np.array([self.class_weight.get(label, 1.0) for label in y])
-            elif isinstance(self.class_weight, str) and self.class_weight == 'balanced':
-                # Balanced weights: n_samples / (n_classes * np.bincount(y))
-                classes = np.unique(y)
-                class_weights = compute_class_weight('balanced', classes=classes, y=y)
-                weight_dict = dict(zip(classes, class_weights))
-                weights = np.array([weight_dict[label] for label in y])
-            else:
-                # List/array format
-                weights = np.array(self.class_weight)
-            
+        weights = self._get_class_weights(y)
+        if weights is not None:
             # Apply weights to gradient
             # For each sample, multiply the gradient contribution by its weight
             weighted_residuals = weights * (y - probs)
@@ -181,6 +177,126 @@ class CustomLogisticRegression(BaseEstimator, ClassifierMixin):
         """Predict class labels"""
         probs = self.predict_proba(X)
         return (probs[:, 1] > 0.5).astype(int)
+    
+    def _hessian(self, X, y):
+        """Calculate Hessian matrix (second derivatives of log-likelihood)"""
+        # Add intercept
+        X_with_intercept = np.column_stack([np.ones(X.shape[0]), X])
+        
+        # Get current parameters
+        params = np.concatenate([[self.intercept_], self.coef_])
+        
+        # Calculate probabilities
+        z = np.dot(X_with_intercept, params)
+        probs = self._sigmoid(z)
+        
+        # Calculate diagonal weights: W[i,i] = p_i * (1 - p_i)
+        W_diag = probs * (1 - probs)
+        
+        # Apply class weights if specified
+        weights = self._get_class_weights(y)
+        if weights is not None:
+            # Apply weights to diagonal elements
+            W_diag = W_diag * weights
+        
+        # Calculate Hessian efficiently: H = X^T * diag(W) * X
+        # Instead of creating the full diagonal matrix, we can compute this as:
+        # H = X^T * (W_diag * X) where W_diag is broadcasted
+        # This is equivalent to: H[i,j] = sum_k(X[k,i] * W_diag[k] * X[k,j])
+        hessian = np.dot(X_with_intercept.T, W_diag[:, np.newaxis] * X_with_intercept)
+        
+        return hessian
+    
+    def get_standard_errors(self, X, y, ridge_alpha=0):
+        """Calculate standard errors of coefficients with tiny ridge regularization"""
+        try:
+            hessian = self._hessian(X, y)
+            
+            # Add tiny ridge regularization to improve numerical stability
+            # This adds a small diagonal term to make the matrix more invertible
+            n_params = hessian.shape[0]
+            ridge_term = ridge_alpha * np.eye(n_params)
+            regularized_hessian = hessian + ridge_term
+            
+            # Calculate covariance matrix
+            # Cov = inv(Hessian) for maximum likelihood estimates
+            try:
+                cov_matrix = np.linalg.inv(regularized_hessian)
+            except np.linalg.LinAlgError:
+                # If still singular, use pseudo-inverse
+                cov_matrix = np.linalg.pinv(regularized_hessian)
+            
+            # Standard errors are square root of diagonal elements
+            standard_errors = np.sqrt(np.diag(cov_matrix))
+            
+            # Separate intercept and coefficient standard errors
+            intercept_se = standard_errors[0]
+            coef_se = standard_errors[1:]
+            
+            return intercept_se, coef_se
+            
+        except Exception as e:
+            print(f"Error calculating standard errors: {e}")
+            return None, None
+    
+    def get_t_values(self, X, y, ridge_alpha=0):
+        """Calculate t-values for coefficients"""
+        intercept_se, coef_se = self.get_standard_errors(X, y, ridge_alpha)
+        
+        if intercept_se is None or coef_se is None:
+            return None, None
+        
+        # Calculate t-values
+        intercept_t = self.intercept_ / intercept_se
+        coef_t = self.coef_ / coef_se
+        
+        return intercept_t, coef_t
+    
+    def get_p_values(self, X, y, ridge_alpha=0):
+        """Calculate p-values for coefficients"""
+        intercept_t, coef_t = self.get_t_values(X, y, ridge_alpha)
+        
+        if intercept_t is None or coef_t is None:
+            return None, None
+        
+        # Calculate degrees of freedom (n_samples - n_features - 1)
+        n_samples = X.shape[0]
+        n_features = X.shape[1]
+        df = n_samples - n_features - 1
+        
+        # Calculate p-values (two-tailed test)
+        intercept_p = 2 * (1 - stats.t.cdf(np.abs(intercept_t), df))
+        coef_p = 2 * (1 - stats.t.cdf(np.abs(coef_t), df))
+        
+        return intercept_p, coef_p
+    
+    def get_confidence_intervals(self, X, y, alpha=0.05, ridge_alpha=0):
+        """Calculate confidence intervals for coefficients"""
+        intercept_se, coef_se = self.get_standard_errors(X, y, ridge_alpha)
+        
+        if intercept_se is None or coef_se is None:
+            return None, None
+        
+        # Calculate degrees of freedom
+        n_samples = X.shape[0]
+        n_features = X.shape[1]
+        df = n_samples - n_features - 1
+        
+        # Calculate critical t-value
+        t_critical = stats.t.ppf(1 - alpha/2, df)
+        
+        # Calculate confidence intervals
+        intercept_ci = (
+            self.intercept_ - t_critical * intercept_se,
+            self.intercept_ + t_critical * intercept_se
+        )
+        
+        coef_ci = np.column_stack([
+            self.coef_ - t_critical * coef_se,
+            self.coef_ + t_critical * coef_se
+        ])
+        
+        return intercept_ci, coef_ci
 
 
 class MixedNaiveBayes:
