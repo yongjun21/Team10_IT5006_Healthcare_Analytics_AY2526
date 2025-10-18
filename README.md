@@ -11,6 +11,15 @@ pip install -r requirements.txt
 ```
 
 ## Start Streamlit
+
 ```bash
 streamlit run src/app.py
 ```
+
+## Sequence for running Modelling Notebooks
+
+- [eda.ipynb](./notebooks/eda.ipynb) (optional)
+- [preprocessing.ipynb](./notebooks/preprocessing.ipynb)
+- [baseline.ipynb](./notebooks/baseline.ipynb)
+- [finetuning.ipynb](./notebooks/finetuning.ipynb) (optional)
+- [models.ipynb](./notebooks/models.ipynb)
